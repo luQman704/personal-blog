@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-
-    reactCompiler: true,
-  /* config options here */
+  reactCompiler: true,
+  adapterPath: require.resolve("@vercel/next/dist/adapter"),
 };
 
 export default nextConfig;
