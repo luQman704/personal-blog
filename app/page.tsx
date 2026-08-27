@@ -3,11 +3,10 @@ import { home, about, person, routes } from '@/resources'
 import { Posts } from '@/components/blog/Posts'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { getPosts } from '@/lib/posts'
-import { projects } from '@/lib/projects'
+import { featuredProjects } from '@/lib/projects'
 
 export default async function Home() {
   const posts = await getPosts().catch(() => [])
-  const featuredProjects = projects.slice(0, 2)
 
   return (
     <Column maxWidth="m" gap="xl" horizontal="center">

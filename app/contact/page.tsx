@@ -1,4 +1,4 @@
-import { Column, Heading, Text, Row, Line } from '@once-ui-system/core'
+import { Column, Grid, Heading, Text, Row, Line } from '@once-ui-system/core'
 import { ContactForm } from '@/components/ContactForm'
 import type { Metadata } from 'next'
 
@@ -85,19 +85,11 @@ export default function ContactPage() {
             </Text>
             <Text
               as="a"
-              href="https://linkedin.com/in/lukmon-awoyemi"
+              href="https://www.linkedin.com/in/lukmon-awoyemi-559659120"
               variant="body-default-s"
               onBackground="neutral-medium"
             >
               LinkedIn ↗
-            </Text>
-            <Text
-              as="a"
-              href="https://github.com/lukmon-awoyemi"
-              variant="body-default-s"
-              onBackground="neutral-medium"
-            >
-              GitHub ↗
             </Text>
           </Column>
         </Column>
@@ -107,23 +99,21 @@ export default function ContactPage() {
       <Column gap="24">
         <Line />
         <Heading as="h2" variant="heading-strong-xl">What I can help with</Heading>
-        <Row gap="16" wrap s={{ direction: 'column' }}>
+        <Grid columns="2" gap="16" s={{ columns: '1' }}>
           {services.map((s, i) => (
             <Column
               key={i}
               gap="8"
-              flex={1}
               background="surface"
               border="neutral-alpha-weak"
               radius="l"
               padding="24"
-              minWidth={240}
             >
               <Heading as="h3" variant="heading-strong-m">{s.title}</Heading>
               <Text variant="body-default-s" onBackground="neutral-medium">{s.body}</Text>
             </Column>
           ))}
-        </Row>
+        </Grid>
       </Column>
     </Column>
   )
