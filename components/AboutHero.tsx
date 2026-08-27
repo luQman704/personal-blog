@@ -1,90 +1,62 @@
-import { Row, Column, Heading, Text, Line } from '@once-ui-system/core'
-
 export default function AboutHero() {
   return (
-    <Column
-      as="section"
-      fillWidth
-      paddingX="l"
-      paddingTop="64"
-      paddingBottom="40"
-      style={{ maxWidth: '1100px', margin: '0 auto' }}
-    >
-      <Row fillWidth gap="64" vertical="start" s={{ direction: 'column', gap: '32' }}>
+    <section className="mx-auto max-w-content px-5 md:px-10 pt-12 md:pt-16 pb-10">
+      {/* two col on md+, stacked on mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-10 md:gap-16 items-start">
 
-        {/* Left — bio text */}
-        <Column flex={1} gap="24">
-          {/* Eyebrow */}
-          <Row gap="12" vertical="center">
-            <Line style={{ width: '32px' }} />
-            <Text
-              variant="label-default-s"
-              onBackground="brand-medium"
-              style={{ letterSpacing: '0.1em', textTransform: 'uppercase' }}
-            >
+        <div>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px" style={{ backgroundColor: 'var(--rust)' }} />
+            <span className="text-xs tracking-widest uppercase font-medium" style={{ color: 'var(--rust)' }}>
               About me
-            </Text>
-          </Row>
+            </span>
+          </div>
 
-          <Heading
-            as="h1"
-            variant="display-strong-m"
-            onBackground="neutral-strong"
+          <h1
+            className="font-serif font-medium leading-tight tracking-tight mb-6"
+            style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: 'var(--ink)' }}
           >
             Developer, writer,{' '}
-            <Text
-              as="em"
-              variant="display-strong-m"
-              onBackground="brand-strong"
-              style={{ fontStyle: 'italic' }}
-            >
-              problem solver
-            </Text>
-          </Heading>
+            <em style={{ fontStyle: 'italic', color: 'var(--rust)' }}>problem solver</em>
+          </h1>
 
-          <Column gap="16" style={{ maxWidth: '580px' }}>
-            <Text variant="body-default-m" onBackground="neutral-medium" style={{ lineHeight: 1.75 }}>
-              I&apos;m Lukmon Awoyemi — a Senior Drupal and full-stack developer based in Wickford,
-              Essex. I&apos;ve spent seven years building enterprise platforms for organisations
-              that can&apos;t afford downtime: the World Trade Organization, MTN Nigeria, and
+          <div className="flex flex-col gap-5 text-base leading-relaxed" style={{ color: 'var(--ink-light)', maxWidth: '580px' }}>
+            <p>
+              I'm Lukmon Awoyemi — a Senior Drupal and full-stack developer based in Wickford,
+              Essex. I've spent seven years building enterprise platforms for organisations
+              that can't afford downtime: the World Trade Organization, MTN Nigeria, and
               international NGOs operating in 46 least-developed countries.
-            </Text>
-            <Text variant="body-default-m" onBackground="neutral-medium" style={{ lineHeight: 1.75 }}>
+            </p>
+            <p>
               My background is in Physics — I graduated as Best Physics Student from Lagos State
               University — and I still approach software the same way I approached circuits
               and waves: find the underlying model, understand the constraints, then find
               the cleanest path through.
-            </Text>
-            <Text variant="body-default-m" onBackground="neutral-medium" style={{ lineHeight: 1.75 }}>
-              I&apos;m currently completing an MSc in Computer Science at the University of
+            </p>
+            <p>
+              I'm currently completing an MSc in Computer Science at the University of
               Hertfordshire (graduating August 2026), building this blog as a headless
               Drupal + Next.js project, and available for senior contract and full-time roles.
-            </Text>
-          </Column>
-        </Column>
+            </p>
+          </div>
+        </div>
 
-        {/* Avatar */}
-        <Row horizontal="end" s={{ horizontal: 'start' }}>
-          <Column
-            background="surface"
-            border="neutral-alpha-medium"
-            radius="l"
-            horizontal="center"
-            vertical="center"
+        {/* Avatar / initials */}
+        <div className="flex md:justify-end">
+          <div
+            className="w-40 h-40 md:w-48 md:h-48 rounded-sm flex items-center justify-center font-serif italic"
             style={{
-              width: '160px',
-              height: '160px',
+              backgroundColor: 'var(--forest)',
+              color: 'var(--cream)',
               fontSize: '48px',
-              fontStyle: 'italic',
-              color: 'var(--brand-on-background-strong)',
-              flexShrink: 0,
+              borderRadius: '4px',
             }}
           >
             LA
-          </Column>
-        </Row>
+          </div>
+        </div>
 
-      </Row>
-    </Column>
+      </div>
+    </section>
   )
 }

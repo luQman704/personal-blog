@@ -16,13 +16,13 @@ const bodies: Record<string, React.ReactNode> = {
       <p>
         Solr is powerful. When it works, it works brilliantly. But when it silently
         truncates your results at a deep pagination threshold — no error, no warning,
-        just missing data — you don&apos;t know you have a problem until an editor notices
+        just missing data — you don't know you have a problem until an editor notices
         the export is short by 400 records.
       </p>
       <p>
-        That&apos;s exactly what happened on a production platform I was maintaining for the
+        That's exactly what happened on a production platform I was maintaining for the
         World Trade Organization. The EDB export had been quietly incomplete for weeks.
-        Here&apos;s how I found it, fixed it, and what I&apos;d bake in from day one on future projects.
+        Here's how I found it, fixed it, and what I'd bake in from day one on future projects.
       </p>
       <h2>The symptom</h2>
       <p>
@@ -33,14 +33,14 @@ const bodies: Record<string, React.ReactNode> = {
       <div className="callout">
         <p>
           <strong>Key signal:</strong> The number 1,000 should have been the immediate tell.
-          Solr&apos;s default <code>maxRows</code> cap is exactly 1,000 when deep pagination
-          isn&apos;t explicitly configured. We&apos;d just never hit that threshold before.
+          Solr's default <code>maxRows</code> cap is exactly 1,000 when deep pagination
+          isn't explicitly configured. We'd just never hit that threshold before.
         </p>
       </div>
       <h2>The fix</h2>
       <p>
-        The cleanest solution for a bulk export — where you need all results and don&apos;t
-        need Solr&apos;s relevance ranking — was to bypass Search API entirely and query the
+        The cleanest solution for a bulk export — where you need all results and don't
+        need Solr's relevance ranking — was to bypass Search API entirely and query the
         database directly.
       </p>
       <pre><code>{`$query = \\Drupal::entityQuery('node')
@@ -53,9 +53,9 @@ $nodes = \\Drupal::entityTypeManager()
   ->getStorage('node')
   ->loadMultiple($nids);`}</code></pre>
       <blockquote>
-        <p>&quot;The best fix isn&apos;t always the most elegant — sometimes it&apos;s routing around the constraint entirely.&quot;</p>
+        <p>"The best fix isn't always the most elegant — sometimes it's routing around the constraint entirely."</p>
       </blockquote>
-      <h2>What I&apos;d do differently</h2>
+      <h2>What I'd do differently</h2>
       <p>
         Add a result count assertion in any export that matters. Before processing,
         compare the Search API count against a direct DB count. If they diverge by
@@ -68,15 +68,15 @@ $nodes = \\Drupal::entityTypeManager()
   'headless-drupal-nextjs': (
     <>
       <p>
-        &quot;Headless Drupal&quot; sounds straightforward — Drupal manages content, Next.js
+        "Headless Drupal" sounds straightforward — Drupal manages content, Next.js
         renders it. In practice there are a handful of sharp edges that nobody writes
-        about until they&apos;ve already cut themselves. Here are the ones that caught me.
+        about until they've already cut themselves. Here are the ones that caught me.
       </p>
       <h2>CORS on the Drupal side</h2>
       <p>
-        By default Drupal&apos;s JSON:API will block cross-origin requests. You need to
+        By default Drupal's JSON:API will block cross-origin requests. You need to
         configure the <code>cors.config</code> in <code>services.yml</code> explicitly.
-        Don&apos;t just set <code>allowedOrigins: [&apos;*&apos;]</code> on production — scope it to
+        Don't just set <code>allowedOrigins: ['*']</code> on production — scope it to
         your frontend domain.
       </p>
       <pre><code>{`# web/sites/default/services.yml
@@ -90,21 +90,21 @@ cors.config:
   supportsCredentials: false`}</code></pre>
       <h2>Preview mode</h2>
       <p>
-        Drupal&apos;s JSON:API doesn&apos;t expose unpublished content to anonymous requests.
+        Drupal's JSON:API doesn't expose unpublished content to anonymous requests.
         For editorial preview you need the <code>jsonapi_extras</code> module plus a
-        custom Next.js preview route that authenticates against Drupal&apos;s OAuth token
+        custom Next.js preview route that authenticates against Drupal's OAuth token
         endpoint before fetching draft content.
       </p>
       <div className="callout">
         <p>
           <strong>Tip:</strong> Use <code>next/headers</code> cookies to persist the
           Drupal session token across preview requests rather than passing it in query
-          params — it&apos;s cleaner and harder to accidentally leak in logs.
+          params — it's cleaner and harder to accidentally leak in logs.
         </p>
       </div>
       <h2>Caching gotchas</h2>
       <p>
-        Next.js ISR and Drupal&apos;s internal page cache can fight each other. The symptom
+        Next.js ISR and Drupal's internal page cache can fight each other. The symptom
         is stale content on the frontend even after a Drupal save. The fix is a cache
         tag purge webhook — Drupal sends a purge request to your Next.js revalidation
         endpoint on node save. Simple, reliable, worth the 30 minutes to set up.
@@ -117,12 +117,12 @@ cors.config:
       <p>
         Most SAML guides assume a single identity provider. The WTO platform I worked
         on needed two — one for WTO staff, one for external delegates — each with
-        different attribute mappings and session lifetimes. Here&apos;s the implementation.
+        different attribute mappings and session lifetimes. Here's the implementation.
       </p>
       <h2>Module setup</h2>
       <p>
         The <code>samlauth</code> contrib module supports multiple IdP configurations
-        from Drupal 10.1 onwards via config entities. Each IdP gets its own{' '}
+        from Drupal 10.1 onwards via config entities. Each IdP gets its own
         <code>saml_idp</code> config entity with its own certificate, SSO URL, and
         attribute mapping.
       </p>
@@ -137,9 +137,9 @@ drush en samlauth -y
 # saml_idp.external_delegates`}</code></pre>
       <h2>The session edge case</h2>
       <p>
-        When a user authenticates via IdP A and then visits a route that triggers IdP B&apos;s
-        assertion, Drupal&apos;s session handler merges the assertions by default, which corrupts
-        the role assignment. The fix is a custom <code>EventSubscriber</code> on{' '}
+        When a user authenticates via IdP A and then visits a route that triggers IdP B's
+        assertion, Drupal's session handler merges the assertions by default, which corrupts
+        the role assignment. The fix is a custom <code>EventSubscriber</code> on
         <code>SamlauthUserSyncEvent</code> that checks which IdP originated the assertion
         before applying roles.
       </p>
@@ -147,12 +147,12 @@ drush en samlauth -y
         <p>
           <strong>Key insight:</strong> Always log the full SAML response during
           development. The attribute names your IdP sends rarely match what you expect,
-          and silent mapping failures are the most common cause of &quot;user logged in but
-          has no roles.&quot;
+          and silent mapping failures are the most common cause of "user logged in but
+          has no roles."
         </p>
       </div>
       <blockquote>
-        <p>&quot;SAML problems are always either a certificate issue, a clock skew issue, or an attribute mapping issue. Usually all three.&quot;</p>
+        <p>"SAML problems are always either a certificate issue, a clock skew issue, or an attribute mapping issue. Usually all three."</p>
       </blockquote>
     </>
   ),
@@ -160,14 +160,14 @@ drush en samlauth -y
   'drupal-10-js-once-api': (
     <>
       <p>
-        Drupal 10 dropped jQuery&apos;s <code>.once()</code> plugin and replaced it with a
+        Drupal 10 dropped jQuery's <code>.once()</code> plugin and replaced it with a
         standalone <code>once()</code> library. This is the single most common breakage
-        point in Drupal 9 → 10 module upgrades, and it fails silently in a way that&apos;s
+        point in Drupal 9 → 10 module upgrades, and it fails silently in a way that's
         easy to miss in testing.
       </p>
       <h2>What changed</h2>
       <p>
-        In Drupal 9 you&apos;d write this to ensure a behaviour only fires once per element:
+        In Drupal 9 you'd write this to ensure a behaviour only fires once per element:
       </p>
       <pre><code>{`// Drupal 9 — jQuery .once()
 Drupal.behaviors.myBehavior = {
@@ -188,8 +188,8 @@ Drupal.behaviors.myBehavior = {
 };`}</code></pre>
       <h2>The library declaration</h2>
       <p>
-        You also need to declare the dependency in your module&apos;s{' '}
-        <code>.libraries.yml</code> — otherwise <code>once</code> won&apos;t be available
+        You also need to declare the dependency in your module's
+        <code>.libraries.yml</code> — otherwise <code>once</code> won't be available
         at runtime even if the syntax is correct.
       </p>
       <pre><code>{`# mymodule.libraries.yml
@@ -201,7 +201,7 @@ mymodule/behaviors:
     - core/drupal`}</code></pre>
       <div className="callout">
         <p>
-          <strong>Migration tip:</strong> Run <code>grep -r &quot;\.once(&quot; web/modules/custom</code>
+          <strong>Migration tip:</strong> Run <code>grep -r "\.once(" web/modules/custom</code>
           to find every occurrence in your custom modules at once. There are usually more
           than you expect.
         </p>
@@ -213,8 +213,8 @@ mymodule/behaviors:
     <>
       <p>
         When Google Analytics introduced consent mode requirements that clashed with
-        the WTO&apos;s data governance policy, we needed to replace GA entirely with a
-        lightweight, self-hosted tracker. Here&apos;s how we built it as a custom Drupal module.
+        the WTO's data governance policy, we needed to replace GA entirely with a
+        lightweight, self-hosted tracker. Here's how we built it as a custom Drupal module.
       </p>
       <h2>The approach</h2>
       <p>
@@ -237,12 +237,12 @@ class AnalyticsEventSubscriber implements EventSubscriberInterface {
 }`}</code></pre>
       <h2>The dashboard</h2>
       <p>
-        A custom admin route exposes the data as a simple table view using Drupal&apos;s
+        A custom admin route exposes the data as a simple table view using Drupal's
         Views-style render arrays. Nothing fancy — page views, top paths, referrer
         breakdown, unique visitors by day. Everything the content team actually needed.
       </p>
       <blockquote>
-        <p>&quot;The best analytics tool is the one that only collects what you actually use.&quot;</p>
+        <p>"The best analytics tool is the one that only collects what you actually use."</p>
       </blockquote>
     </>
   ),
@@ -267,7 +267,7 @@ const fallbackBody = (post: Post) => (
     <div className="callout">
       <p>
         <strong>Note:</strong> The post body field in Drupal should be exposed via
-        JSON:API. Make sure <code>body</code> is included in your resource type&apos;s
+        JSON:API. Make sure <code>body</code> is included in your resource type's
         allowed fields configuration.
       </p>
     </div>
@@ -286,7 +286,7 @@ export default function PostBody({ post }: PostBodyProps) {
   const content = bodies[post.slug] ?? fallbackBody(post)
 
   return (
-    <div className="post-body" style={{ maxWidth: '680px', margin: '0 auto', paddingLeft: '24px', paddingRight: '24px' }}>
+    <div className="post-body mx-auto px-5 md:px-10" style={{ maxWidth: '680px' }}>
       {content}
     </div>
   )

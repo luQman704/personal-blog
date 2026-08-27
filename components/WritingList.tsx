@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Column, Row, Text, Tag, Line } from '@once-ui-system/core'
+import { useState } from 'react'
 import type { Post } from '@/types'
 
 interface WritingListProps {
@@ -9,52 +9,49 @@ interface WritingListProps {
 }
 
 export default function WritingList({ posts }: WritingListProps) {
+  const [hoveredId, setHoveredId] = useState<string | null>(null)
+
   return (
-    <Column
-      as="section"
-      fillWidth
-      paddingX="l"
-      marginTop="32"
-      style={{ maxWidth: '1100px', margin: '32px auto 0' }}
-    >
-      <Line />
-      {posts.map((post) => (
-        <Link
-          key={post.id}
-          href={`/writing/${post.slug}`}
-          style={{ textDecoration: 'none', display: 'block' }}
-        >
-          <Row
-            fillWidth
-            horizontal="between"
-            vertical="center"
-            paddingY="20"
-            borderBottom="neutral-alpha-weak"
-            gap="16"
-            wrap
-            style={{ transition: 'padding-left 0.2s' }}
+    <section className="mx-auto max-w-content px-5 md:px-10 mt-8 animate-fade-up delay-200">
+      <div className="border-t" style={{ borderColor: 'var(--border)' }}>
+        {posts.map((post) => (
+          <Link
+            key={post.id}
+            href={`/writing/${post.slug}`}
+            className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 border-b transition-all duration-200"
+            style={{
+              borderColor: 'var(--border)',
+              textDecoration: 'none',
+              paddingLeft: hoveredId === post.id ? '8px' : '0',
+            }}
+            onMouseEnter={() => setHoveredId(post.id)}
+            onMouseLeave={() => setHoveredId(null)}
           >
             {/* Title + tag */}
-            <Row gap="12" vertical="center" flex={1} wrap>
-              <Text variant="body-default-m" onBackground="neutral-strong">
+            <div className="flex flex-wrap items-center gap-3 flex-1">
+              <span className="font-serif text-base" style={{ color: 'var(--ink)' }}>
                 {post.title}
-              </Text>
+              </span>
               {post.tags?.[0] && (
-                <Tag label={post.tags[0]} variant="brand" size="s" />
+                <span
+                  className="text-xs font-medium tracking-wide uppercase px-2 py-0.5"
+                  style={{ color: 'var(--rust)', backgroundColor: 'var(--rust-light)', borderRadius: '2px' }}
+                >
+                  {post.tags[0]}
+                </span>
               )}
-            </Row>
+            </div>
 
-            {/* Date + read time */}
-            <Text
-              variant="label-default-xs"
-              onBackground="neutral-weak"
-              style={{ fontFamily: 'var(--font-code)', whiteSpace: 'nowrap' }}
+            {/* Date — right on desktop, left-aligned below title on mobile */}
+            <span
+              className="text-xs font-mono sm:whitespace-nowrap"
+              style={{ color: 'var(--ink-muted)' }}
             >
               {post.date} · {post.readTime}
-            </Text>
-          </Row>
-        </Link>
-      ))}
-    </Column>
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
   )
 }

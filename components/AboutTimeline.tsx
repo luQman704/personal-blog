@@ -1,5 +1,3 @@
-import { Column, Row, Heading, Text, Tag } from '@once-ui-system/core'
-
 const timeline = [
   {
     period: 'Aug 2021 – present',
@@ -53,83 +51,69 @@ const timeline = [
 
 export default function AboutTimeline() {
   return (
-    <Column
-      as="section"
-      fillWidth
-      paddingX="l"
-      marginTop="104"
-      gap="32"
-      style={{ maxWidth: '1100px', margin: '104px auto 0' }}
-    >
-      <Heading variant="display-strong-xs" onBackground="neutral-strong">
-        Experience &amp; education
-      </Heading>
+    <section className="mx-auto max-w-content px-5 md:px-10 mt-16 md:mt-20">
+      <h2
+        className="font-serif font-medium tracking-tight mb-10 text-2xl md:text-3xl"
+        style={{ color: 'var(--ink)' }}
+      >
+        Experience & education
+      </h2>
 
-      <Column fillWidth gap="0">
-        {timeline.map((item, i) => (
-          <Row
-            key={i}
-            fillWidth
-            gap="24"
-            paddingY="32"
-            borderBottom={i < timeline.length - 1 ? 'neutral-alpha-weak' : undefined}
-            s={{ direction: 'column', gap: '16' }}
-          >
-            {/* Left — period */}
-            <Column style={{ width: '180px', flexShrink: 0 }} s={{ hide: false }}>
-              <Text
-                variant="label-default-s"
-                onBackground="neutral-weak"
-                style={{ fontFamily: 'var(--font-code)' }}
-              >
+      <div className="relative">
+        {/* Vertical line — hidden on mobile */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-px hidden md:block"
+          style={{ backgroundColor: 'var(--border)', left: '7px' }}
+        />
+
+        <div className="flex flex-col gap-10">
+          {timeline.map((item, i) => (
+            <div key={i} className="md:pl-10 relative">
+              {/* Dot */}
+              <div
+                className="absolute hidden md:block w-3.5 h-3.5 rounded-full border-2 top-1"
+                style={{
+                  left: '0',
+                  backgroundColor: 'var(--cream)',
+                  borderColor: 'var(--rust)',
+                }}
+              />
+
+              <p className="text-xs font-mono mb-1.5" style={{ color: 'var(--ink-muted)' }}>
                 {item.period}
-              </Text>
-            </Column>
-
-            {/* Right — content */}
-            <Column flex={1} gap="8">
-              {/* Dot indicator */}
-              <Row gap="12" vertical="center">
-                <span
-                  style={{
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '50%',
-                    border: '2px solid var(--brand-solid-strong)',
-                    backgroundColor: 'var(--page-background)',
-                    flexShrink: 0,
-                  }}
-                />
-                <Heading as="h3" variant="heading-default-m" onBackground="neutral-strong">
-                  {item.role}
-                </Heading>
-              </Row>
-
-              <Text
-                variant="body-default-s"
-                onBackground="brand-medium"
-                style={{ fontWeight: 500, paddingLeft: '22px' }}
+              </p>
+              <h3
+                className="font-serif font-medium text-lg leading-snug mb-0.5"
+                style={{ color: 'var(--ink)' }}
               >
+                {item.role}
+              </h3>
+              <p className="text-sm font-medium mb-3" style={{ color: 'var(--rust)' }}>
                 {item.company}
-              </Text>
-
-              <Text
-                variant="body-default-s"
-                onBackground="neutral-medium"
-                style={{ lineHeight: 1.7, paddingLeft: '22px' }}
-              >
+              </p>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--ink-light)' }}>
                 {item.description}
-              </Text>
-
-              <Row gap="8" wrap style={{ paddingLeft: '22px', marginTop: '4px' }}>
+              </p>
+              <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
-                  <Tag key={tag} label={tag} variant="neutral" size="s" />
+                  <span
+                    key={tag}
+                    className="text-xs font-mono px-2 py-0.5 border"
+                    style={{
+                      backgroundColor: 'var(--cream-dark)',
+                      borderColor: 'var(--border)',
+                      color: 'var(--ink-light)',
+                      borderRadius: '2px',
+                    }}
+                  >
+                    {tag}
+                  </span>
                 ))}
-              </Row>
-            </Column>
-          </Row>
-        ))}
-      </Column>
-    </Column>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }

@@ -1,62 +1,54 @@
-'use client'
+'use client';
 
-import { Row, Column, Heading, Text, Button } from '@once-ui-system/core'
+
+import Link from 'next/link'
 
 export default function AboutStrip() {
   return (
-    <Column
-      as="section"
-      fillWidth
-      paddingX="l"
-      marginTop="104"
-      style={{ maxWidth: '1100px', margin: '104px auto 0' }}
-    >
-      <Row
-        fillWidth
-        background="surface"
-        border="neutral-alpha-medium"
-        radius="l"
-        padding="48"
-        gap="64"
-        vertical="center"
-        s={{ direction: 'column', gap: '32', padding: '32' }}
-        style={{ background: 'var(--brand-alpha-weak)' }}
+    <section className="mx-auto max-w-content px-5 md:px-10 mt-16 md:mt-20 animate-fade-up delay-300">
+      <div
+        className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 lg:gap-16 items-center px-8 md:px-16 py-10 md:py-14"
+        style={{ backgroundColor: 'var(--forest)', borderRadius: '2px' }}
       >
         {/* Left */}
-        <Column flex={1} gap="16">
-          <Heading
-            as="h2"
-            variant="display-strong-s"
-            onBackground="neutral-strong"
+        <div>
+          <h2
+            className="font-serif font-medium leading-tight tracking-tight mb-5 text-3xl md:text-[34px]"
+            style={{ color: 'var(--cream)' }}
           >
             Enterprise Drupal,{' '}
-            <Text
-              as="em"
-              variant="display-strong-s"
-              onBackground="accent-strong"
-              style={{ fontStyle: 'italic' }}
-            >
-              done properly
-            </Text>
-          </Heading>
-          <Text variant="body-default-m" onBackground="neutral-medium" style={{ lineHeight: 1.7 }}>
-            I&apos;ve spent seven years building platforms that serve ministers, diplomats and
+            <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>done properly</em>
+          </h2>
+          <p className="text-base leading-relaxed" style={{ color: 'rgba(247,244,238,0.7)' }}>
+            I've spent seven years building platforms that serve ministers, diplomats and
             international trade organisations. I know what breaks at scale, what Drupal
-            can and can&apos;t do, and how to ship without drama. Available for senior
+            can and can't do, and how to ship without drama. Available for senior
             contract and full-time roles.
-          </Text>
-        </Column>
+          </p>
+        </div>
 
-        {/* Right */}
-        <Column gap="12" style={{ flexShrink: 0, minWidth: '200px' }}>
-          <Button href="/cv" variant="primary" size="m" fillWidth>
+        {/* Right — full width on mobile, fixed width on lg */}
+        <div className="flex flex-row lg:flex-col gap-3">
+          <Link
+            href="/cv"
+            className="flex-1 lg:flex-none block text-center text-sm font-medium py-3 px-6 transition-colors duration-200"
+            style={{ backgroundColor: 'var(--cream)', color: 'var(--forest)', borderRadius: '2px', textDecoration: 'none' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--gold)' }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--cream)' }}
+          >
             View my CV →
-          </Button>
-          <Button href="/projects" variant="secondary" size="m" fillWidth>
+          </Link>
+          <Link
+            href="/projects"
+            className="flex-1 lg:flex-none block text-center text-sm py-3 px-6 border transition-colors duration-200"
+            style={{ color: 'var(--cream)', borderColor: 'rgba(247,244,238,0.3)', borderRadius: '2px', textDecoration: 'none' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--cream)' }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(247,244,238,0.3)' }}
+          >
             See projects
-          </Button>
-        </Column>
-      </Row>
-    </Column>
+          </Link>
+        </div>
+      </div>
+    </section>
   )
 }
