@@ -20,7 +20,7 @@ export default function AboutStrip() {
             <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>done properly</em>
           </h2>
           <p className="text-base leading-relaxed" style={{ color: 'rgba(247,244,238,0.7)' }}>
-            I've spent six years building platforms that serve ministers, diplomats and
+            I've spent seven years building platforms that serve ministers, diplomats and
             international trade organisations. I know what breaks at scale, what Drupal
             can and can't do, and how to ship without drama. Available for senior
             contract and full-time roles.

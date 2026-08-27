@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Senior Drupal & full-stack developer. Writing about enterprise web architecture, headless CMS, and PHP.',
   openGraph: {
     title:       'Lukmon Awoyemi',
-    description: 'Senior Drupal & full-stack developer. 6+ years shipping enterprise platforms.',
+    description: 'Senior Drupal & full-stack developer. 7+ years shipping enterprise platforms.',
     url:         'https://lukmon.dev',
     siteName:    'Lukmon Awoyemi',
     locale:      'en_GB',

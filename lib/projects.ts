@@ -20,7 +20,7 @@ export const projects: Project[] = [
       'Enterprise Drupal 10 platform for the WTO\'s trade development programme. Multilingual, high-traffic, serving ministers and trade officials across 46 LDCs.',
     longDescription:
       'Full Drupal 10 rebuild including custom webform handlers, Paragraphs-based layout system, multilingual content architecture, and Search API + Solr integration.',
-    tags: ['Drupal 10', 'PHP', 'Solr', 'Paragraphs', 'Pantheon', 'Multilingual'],
+    tags: ['Drupal', 'PHP', 'Solr', 'Paragraphs', 'Pantheon', 'Multilingual'],
     category: 'Drupal',
     status: 'Live',
     year: '2024–present',
@@ -39,7 +39,7 @@ export const projects: Project[] = [
       'REST API-driven Drupal platform for WTO trade policy question-and-answer workflows. SAML dual-authentication for WTO staff and external delegates.',
     longDescription:
       'Built REST API endpoints for TPR question/answer workflows, implemented dual SAML authentication with two identity providers, and developed a custom ga_analytics_tracker module replacing Google Analytics.',
-    tags: ['Drupal 10', 'REST API', 'SAML', 'PHP', 'Jira'],
+    tags: ['Drupal', 'REST API', 'SAML', 'PHP', 'Jira'],
     category: 'Drupal',
     status: 'Live',
     year: '2023–present',
@@ -54,16 +54,16 @@ export const projects: Project[] = [
     id: '3',
     title: 'Lukmon.dev — This Blog',
     description:
-      'Personal portfolio and blog. Headless Drupal 10 backend, Next.js 14 App Router frontend, deployed on Pantheon + Vercel.',
+      'Personal portfolio and blog. Headless Drupal backend, Next.js App Router frontend, deployed on Pantheon + Vercel.',
     longDescription:
       'Built to demonstrate headless Drupal architecture in a real-world context. Drupal manages content via JSON:API, Next.js handles rendering with ISR and static generation.',
-    tags: ['Next.js 14', 'Drupal 10', 'TypeScript', 'Tailwind', 'Vercel', 'Pantheon'],
+    tags: ['Next.js', 'Drupal', 'TypeScript', 'Tailwind', 'Vercel', 'Pantheon'],
     category: 'Full Stack',
     status: 'In Progress',
     year: '2026',
     repoUrl: 'https://github.com/lukmon-awoyemi/lukmon-dev',
     highlights: [
-      'Headless Drupal 10 + Next.js 14 App Router',
+      'Headless Drupal + Next.js App Router',
       'ISR with Drupal cache tag purge webhooks',
       'MDX support for rich interactive post content',
       'Deployed on Vercel (frontend) + Pantheon (CMS)',

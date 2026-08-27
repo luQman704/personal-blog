@@ -1,27 +1,35 @@
 const timeline = [
   {
-    period: '2024 – present',
-    role: 'Senior Drupal Developer',
-    company: 'Ronder Digital / Softescu',
+    period: 'Aug 2021 – present',
+    role: 'Senior Drupal & Full Stack Developer',
+    company: 'Softescu (Remote)',
     description:
-      'Leading Drupal 10 development across WTO enterprise platforms — EIF, STDF, TPRQA, Fish Fund, and TAMS. Custom module development, SAML authentication, REST APIs, and Drupal 11 upgrade planning.',
-    tags: ['Drupal 10', 'PHP', 'REST API', 'SAML', 'Pantheon'],
+      'Key client: World Trade Organization — TAMS, STDF, TPRQA, EIF platforms. Custom REST resource plugins, SAML/ADFS SSO, enterprise Drupal platform architecture, Config Split for multi-environment management, and Drupal 10 → 11 upgrade planning.',
+    tags: ['Drupal', 'PHP', 'REST API', 'SAML', 'Pantheon', 'React'],
   },
   {
-    period: '2023 – 2024',
+    period: 'May 2025 – Aug 2025',
     role: 'Full Stack Developer',
-    company: 'Proxify / Upwork (Freelance)',
+    company: 'Fat Beehive (Remote, UK)',
     description:
-      'Contract engagements including a specialty chemicals distributor platform and a South African e-commerce PrestaShop migration to PHP 8.2 with Yoco payment integration.',
-    tags: ['PHP 8.2', 'PrestaShop', 'React', 'Laravel'],
+      'Drupal CMS backends for UK clients. Custom module patches, Drupal Commerce compatibility fixes for React checkout flows, Drupal version upgrades, and complex support ticket resolution across Drupal and React frontends.',
+    tags: ['Drupal', 'PHP', 'React', 'Drupal Commerce'],
   },
   {
-    period: '2021 – 2023',
-    role: 'Drupal Developer',
-    company: 'Solutions Processors Inc., Miami',
+    period: 'Sep 2024 – May 2025',
+    role: 'Full Stack Developer',
+    company: 'Ekfrazo — Contract for MTN Nigeria (Remote)',
     description:
-      'Drupal 8/9 development for US-based clients. Custom theme development, module development, CMS migrations, and performance optimisation.',
-    tags: ['Drupal 9', 'PHP', 'JavaScript', 'MySQL'],
+      'Led Drupal backend development for MTN Play (play.mtn.ng), a platform serving millions of users. Built REST and JSON:API endpoints, custom content workflow modules, and React frontend components including a custom audio player with Drupal JSON:API integration.',
+    tags: ['Drupal', 'React', 'JSON:API', 'Node.js', 'PHP'],
+  },
+  {
+    period: 'May 2024 – Dec 2024',
+    role: 'Web Developer',
+    company: 'Ronder Digital (Remote, Netherlands)',
+    description:
+      'Drupal-powered campaign and institutional websites for Dutch clients including VGN and Landschap Noord-Holland. Figma-to-Twig workflows, custom themes, content types, and Core Web Vitals optimisation.',
+    tags: ['Drupal', 'Twig', 'PHP', 'Figma', 'SCSS'],
   },
   {
     period: '2026 (expected)',
@@ -33,7 +41,7 @@ const timeline = [
   },
   {
     period: '2019',
-    role: 'BSc Physics',
+    role: 'BSc Physics (2:1)',
     company: 'Lagos State University',
     description:
       'Graduated as Best Physics Student. The analytical and modelling skills from physics directly inform how I approach software architecture and debugging.',

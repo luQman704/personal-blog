@@ -3,21 +3,21 @@
 import Link from 'next/link'
 
 const stackTags = [
-  { label: 'Drupal 10', highlight: true  },
+  { label: 'Drupal',    highlight: true  },
   { label: 'Next.js',   highlight: true  },
   { label: 'React',     highlight: false },
   { label: 'PHP 8',     highlight: false },
-  { label: 'Laravel',   highlight: false },
   { label: 'TypeScript',highlight: false },
+  { label: 'Node.js',   highlight: false },
   { label: 'MySQL',     highlight: false },
   { label: 'Solr',      highlight: false },
-  { label: 'DDEV',      highlight: false },
   { label: 'Pantheon',  highlight: false },
+  { label: 'DDEV',      highlight: false },
 ]
 
 const stats = [
   { label: 'Based in',      value: 'Wickford, Essex, UK' },
-  { label: 'Experience',    value: '6+ years'            },
+  { label: 'Experience',    value: '7+ years'            },
   { label: 'Certification', value: 'Acquia D10'          },
   { label: 'MSc',           value: "Hertfordshire '26"   },
 ]
@@ -33,7 +33,7 @@ export default function HeroSection() {
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px" style={{ backgroundColor: 'var(--rust)' }} />
             <span className="text-xs tracking-widest uppercase font-medium" style={{ color: 'var(--rust)' }}>
-              Acquia Certified · Drupal 10
+              Acquia Certified · Drupal
             </span>
           </div>
 
@@ -50,7 +50,7 @@ export default function HeroSection() {
             className="text-base md:text-lg leading-relaxed mb-9 max-w-xl"
             style={{ color: 'var(--ink-light)' }}
           >
-            Senior Drupal &amp; full-stack developer with 6+ years shipping production
+            Senior Drupal &amp; full-stack developer with 7+ years shipping production
             systems for the WTO, MTN, and global NGOs. I write about architecture,
             headless CMS, and the things I've learned the hard way.
           </p>

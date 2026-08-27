@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About — Lukmon Awoyemi',
-  description: 'Senior Drupal developer, Physics graduate, MSc Computer Science. Based in Wickford, Essex.',
+  description: 'Senior Drupal & full-stack developer with 7+ years experience. Acquia Certified. Physics graduate, MSc Computer Science. Based in Wickford, Essex.',
 }
 
 export default function AboutPage() {

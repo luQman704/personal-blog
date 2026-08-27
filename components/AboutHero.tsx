@@ -23,19 +23,19 @@ export default function AboutHero() {
           <div className="flex flex-col gap-5 text-base leading-relaxed" style={{ color: 'var(--ink-light)', maxWidth: '580px' }}>
             <p>
               I'm Lukmon Awoyemi — a Senior Drupal and full-stack developer based in Wickford,
-              Essex. I've spent six years building enterprise platforms for organisations
+              Essex. I've spent seven years building enterprise platforms for organisations
               that can't afford downtime: the World Trade Organization, MTN Nigeria, and
               international NGOs operating in 46 least-developed countries.
             </p>
             <p>
-              My background is in Physics — I graduated first in my class from Lagos State
+              My background is in Physics — I graduated as Best Physics Student from Lagos State
               University — and I still approach software the same way I approached circuits
               and waves: find the underlying model, understand the constraints, then find
               the cleanest path through.
             </p>
             <p>
               I'm currently completing an MSc in Computer Science at the University of
-              Hertfordshire (graduating September 2026), building this blog as a headless
+              Hertfordshire (graduating August 2026), building this blog as a headless
               Drupal + Next.js project, and available for senior contract and full-time roles.
             </p>
           </div>
