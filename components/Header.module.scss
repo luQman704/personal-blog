@@ -1,0 +1,10 @@
+.position {
+  top: 0;
+}
+
+@media (max-width: 768px) {
+  .position {
+    bottom: 0;
+    top: unset;
+  }
+}

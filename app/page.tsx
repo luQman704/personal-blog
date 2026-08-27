@@ -1,41 +1,74 @@
-import HeroSection        from '@/components/HeroSection'
-import SectionDivider     from '@/components/SectionDivider'
-import FeaturedPost       from '@/components/FeaturedPost'
-import PostsGrid          from '@/components/PostsGrid'
-import WritingList        from '@/components/WritingList'
-import AboutStrip         from '@/components/AboutStrip'
-import NewsletterSection  from '@/components/NewsletterSection'
-import { getFeaturedPost, getNonFeaturedPosts } from '@/lib/posts'
+import { Column, Heading, Text, Button, Row, Line, RevealFx } from '@once-ui-system/core'
+import { home, about, routes } from '@/resources'
+import { Posts } from '@/components/blog/Posts'
+import { ProjectCard } from '@/components/projects/ProjectCard'
+import { getPosts } from '@/lib/posts'
+import { projects } from '@/lib/projects'
 
-export default async function HomePage() {
-  const [featured, rest] = await Promise.all([
-    getFeaturedPost(),
-    getNonFeaturedPosts(),
-  ])
-
-  const gridPosts = rest.slice(0, 4)
-  const listPosts = rest.slice(3)
+export default async function Home() {
+  const posts = await getPosts().catch(() => [])
+  const featuredProjects = projects.slice(0, 2)
 
   return (
-    <>
-      <HeroSection />
+    <Column maxWidth="m" gap="xl" horizontal="center">
+      {/* Hero */}
+      <Column fillWidth horizontal="center" gap="m">
+        <Column maxWidth="s" horizontal="center" align="center">
+          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
+            <Heading wrap="balance" variant="display-strong-l">
+              {home.headline}
+            </Heading>
+          </RevealFx>
+          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
+            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+              {home.subline}
+            </Text>
+          </RevealFx>
+          <RevealFx paddingTop="12" delay={0.4} horizontal="center">
+            <Button
+              id="about"
+              data-border="rounded"
+              href="/about"
+              variant="secondary"
+              size="m"
+              arrowIcon
+            >
+              {about.label}
+            </Button>
+          </RevealFx>
+        </Column>
+      </Column>
 
-      <SectionDivider label="Featured writing" />
-      {featured && <FeaturedPost post={featured} />}
-
-      {gridPosts.length > 0 && <PostsGrid posts={gridPosts} />}
-
-      {listPosts.length > 0 && (
-        <>
-          <div style={{ marginTop: '72px' }}>
-            <SectionDivider label="All writing" />
-          </div>
-          <WritingList posts={listPosts} />
-        </>
+      {/* Latest writing */}
+      {routes['/writing'] && posts.length > 0 && (
+        <Column fillWidth gap="24" marginBottom="l">
+          <Row fillWidth paddingRight="64">
+            <Line maxWidth={48} />
+          </Row>
+          <Row fillWidth gap="24" marginTop="40" s={{ direction: 'column' }}>
+            <Row flex={1} paddingLeft="l" paddingTop="24">
+              <Heading as="h2" variant="display-strong-xs" wrap="balance">
+                Latest writing
+              </Heading>
+            </Row>
+            <Row flex={3} paddingX="20">
+              <Posts posts={posts} range={[1, 2]} columns="2" />
+            </Row>
+          </Row>
+          <Row fillWidth paddingLeft="64" horizontal="end">
+            <Line maxWidth={48} />
+          </Row>
+        </Column>
       )}
 
-      <AboutStrip />
-      <NewsletterSection />
-    </>
+      {/* Featured projects */}
+      {routes['/projects'] && (
+        <Column fillWidth gap="xl" paddingX="l">
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </Column>
+      )}
+    </Column>
   )
 }

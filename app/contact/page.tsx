@@ -1,18 +1,18 @@
-'use client';
-
-import ContactForm    from '@/components/ContactForm'
-import SectionDivider from '@/components/SectionDivider'
+import { Column, Heading, Text, Row, Line } from '@once-ui-system/core'
+import { ContactForm } from '@/components/ContactForm'
 import type { Metadata } from 'next'
-import metadata from "@/components/metadata";
 
-
+export const metadata: Metadata = {
+  title:       'Contact — Lukmon Awoyemi',
+  description: 'Get in touch for senior Drupal contract roles, full-stack projects, and architecture consulting.',
+}
 
 const availability = [
-  { label: 'Status',       value: 'Available from May 2026'          },
-  { label: 'Preference',   value: 'Remote or hybrid (UK/EU)'         },
-  { label: 'Rate',         value: 'On request'                       },
-  { label: 'Notice',       value: '2 weeks'                          },
-  { label: 'Response',     value: 'Within 1–2 business days'         },
+  { label: 'Status',     value: 'Available from May 2026'      },
+  { label: 'Preference', value: 'Remote or hybrid (UK/EU)'     },
+  { label: 'Rate',       value: 'On request'                   },
+  { label: 'Notice',     value: '2 weeks'                      },
+  { label: 'Response',   value: 'Within 1–2 business days'     },
 ]
 
 const services = [
@@ -36,137 +36,95 @@ const services = [
 
 export default function ContactPage() {
   return (
-    <div className="pb-20">
-      {/* Page header */}
-      <div className="mx-auto max-w-content px-5 md:px-10 pt-12 md:pt-16 pb-12">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="w-8 h-px" style={{ backgroundColor: 'var(--rust)' }} />
-          <span className="text-xs tracking-widest uppercase font-medium" style={{ color: 'var(--rust)' }}>
-            Get in touch
-          </span>
-        </div>
-        <h1
-          className="font-serif font-medium tracking-tight"
-          style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: 'var(--ink)' }}
-        >
-          Hire me
-        </h1>
-        <p className="mt-4 text-base max-w-lg" style={{ color: 'var(--ink-muted)' }}>
-          I'm available for senior Drupal contract roles, full-stack projects, and
-          architecture consulting. If you're building something serious, let's talk.
-        </p>
-      </div>
+    <Column maxWidth="m" gap="xl" paddingY="12">
+      {/* Header */}
+      <Column gap="16">
+        <Heading variant="display-strong-s">Contact</Heading>
+        <Text variant="body-default-l" onBackground="neutral-weak">
+          I&apos;m available for senior Drupal contract roles, full-stack projects, and architecture
+          consulting. If you&apos;re building something serious, let&apos;s talk.
+        </Text>
+      </Column>
 
-      <SectionDivider label="Availability" />
+      <Line />
 
-      {/* Main grid — form + sidebar */}
-      <div className="mx-auto max-w-content px-5 md:px-10 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-10 lg:gap-16">
+      {/* Availability + Form grid */}
+      <Row gap="48" s={{ direction: 'column' }}>
+        {/* Contact form */}
+        <Column flex={2} gap="24">
+          <Heading as="h2" variant="heading-strong-xl">Send a message</Heading>
+          <ContactForm />
+        </Column>
 
-          {/* ── Form ── */}
-          <div>
-            <h2 className="font-serif font-medium text-xl mb-8" style={{ color: 'var(--ink)' }}>
-              Send a message
-            </h2>
-            <ContactForm />
-          </div>
-
-          {/* ── Sidebar ── */}
-          <div className="flex flex-col gap-6">
-            {/* Availability card */}
-            <div
-              className="border p-6"
-              style={{ backgroundColor: 'var(--cream-dark)', borderColor: 'var(--border)', borderRadius: '2px' }}
-            >
-              <p className="text-xs tracking-widest uppercase font-medium mb-5" style={{ color: 'var(--ink-muted)' }}>
-                Availability
-              </p>
+        {/* Sidebar */}
+        <Column flex={1} gap="24">
+          {/* Availability */}
+          <Column gap="16" background="surface" border="neutral-alpha-weak" radius="l" padding="24">
+            <Text variant="label-strong-s" onBackground="neutral-weak">Availability</Text>
+            <Column gap="0">
               {availability.map((item, i) => (
-                <div
+                <Row
                   key={item.label}
-                  className="flex justify-between py-2.5"
-                  style={{ borderBottom: i < availability.length - 1 ? '1px solid var(--border)' : 'none' }}
+                  horizontal="between"
+                  vertical="center"
+                  paddingY="12"
+                  borderBottom={i < availability.length - 1 ? 'neutral-alpha-weak' : undefined}
                 >
-                  <span className="text-sm" style={{ color: 'var(--ink-muted)' }}>{item.label}</span>
-                  <span className="text-sm font-medium text-right" style={{ color: 'var(--ink)' }}>{item.value}</span>
-                </div>
+                  <Text variant="body-default-s" onBackground="neutral-weak">{item.label}</Text>
+                  <Text variant="body-default-s" onBackground="neutral-strong">{item.value}</Text>
+                </Row>
               ))}
-            </div>
+            </Column>
+          </Column>
 
-            {/* Direct contact */}
-            <div
-              className="border p-6"
-              style={{ backgroundColor: 'var(--cream)', borderColor: 'var(--border)', borderRadius: '2px' }}
+          {/* Direct links */}
+          <Column gap="12" background="surface" border="neutral-alpha-weak" radius="l" padding="24">
+            <Text variant="label-strong-s" onBackground="neutral-weak">Direct contact</Text>
+            <Text as="a" href="mailto:lukmon@lukmon.dev" variant="body-default-s" onBackground="brand-medium">
+              lukmon@lukmon.dev
+            </Text>
+            <Text
+              as="a"
+              href="https://linkedin.com/in/lukmon-awoyemi"
+              variant="body-default-s"
+              onBackground="neutral-medium"
             >
-              <p className="text-xs tracking-widest uppercase font-medium mb-5" style={{ color: 'var(--ink-muted)' }}>
-                Direct contact
-              </p>
-              <div className="flex flex-col gap-3">
-                <a
-                  href="mailto:lukmon@lukmon.dev"
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: 'var(--rust)', textDecoration: 'none' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--rust)' }}
-                >
-                  lukmon@lukmon.dev
-                </a>
-                <a
-                  href="https://linkedin.com/in/lukmon-awoyemi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: 'var(--ink-muted)', textDecoration: 'none' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-muted)' }}
-                >
-                  LinkedIn ↗
-                </a>
-                <a
-                  href="https://github.com/lukmon-awoyemi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: 'var(--ink-muted)', textDecoration: 'none' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-muted)' }}
-                >
-                  GitHub ↗
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+              LinkedIn ↗
+            </Text>
+            <Text
+              as="a"
+              href="https://github.com/lukmon-awoyemi"
+              variant="body-default-s"
+              onBackground="neutral-medium"
+            >
+              GitHub ↗
+            </Text>
+          </Column>
+        </Column>
+      </Row>
 
       {/* Services */}
-      <div className="mt-20">
-        <SectionDivider label="What I can help with" />
-      </div>
-      <section className="mx-auto max-w-content px-5 md:px-10 mt-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <Column gap="24">
+        <Line />
+        <Heading as="h2" variant="heading-strong-xl">What I can help with</Heading>
+        <Row gap="16" wrap s={{ direction: 'column' }}>
           {services.map((s, i) => (
-            <div
+            <Column
               key={i}
-              className="p-7 border"
-              style={{
-                backgroundColor: 'var(--cream)',
-                borderColor: 'var(--border)',
-                borderRadius: '2px',
-              }}
+              gap="8"
+              flex={1}
+              background="surface"
+              border="neutral-alpha-weak"
+              radius="l"
+              padding="24"
+              minWidth={240}
             >
-              <h3 className="font-serif font-medium text-lg mb-3" style={{ color: 'var(--ink)' }}>
-                {s.title}
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-light)', lineHeight: '1.75' }}>
-                {s.body}
-              </p>
-            </div>
+              <Heading as="h3" variant="heading-strong-m">{s.title}</Heading>
+              <Text variant="body-default-s" onBackground="neutral-medium">{s.body}</Text>
+            </Column>
           ))}
-        </div>
-      </section>
-
-    </div>
+        </Row>
+      </Column>
+    </Column>
   )
 }
