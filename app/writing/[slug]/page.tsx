@@ -1,16 +1,15 @@
-import { notFound }        from 'next/navigation'
-import PostHeader          from '@/components/PostHeader'
-import NewsletterSection   from '@/components/NewsletterSection'
+import { notFound } from 'next/navigation'
+import { Column, Heading, Text, Row, Tag, Line } from '@once-ui-system/core'
 import { getPostBySlug, getAllSlugs } from '@/lib/posts'
-import type { Metadata }   from 'next'
+import type { Metadata } from 'next'
 
-// ─── Next.js 16: params is a Promise ─────────────────────────────────────────
+// Next.js 16: params is a Promise
 interface Props {
   params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
-  const slugs = await getAllSlugs()
+  const slugs = await getAllSlugs().catch(() => [])
   return slugs.map((slug) => ({ slug }))
 }
 
@@ -39,21 +38,35 @@ export default async function PostPage({ params }: Props) {
   if (!post) notFound()
 
   return (
-    <article className="pb-20">
-      <PostHeader post={post} />
+    <Column maxWidth="s" gap="xl" paddingY="12">
+      {/* Post header */}
+      <Column gap="16">
+        <Row gap="16" vertical="center" wrap>
+          <Text variant="body-default-xs" onBackground="neutral-weak">{post.date}</Text>
+          {post.category && (
+            <Tag label={post.category} variant="brand" size="s" />
+          )}
+          <Text variant="body-default-xs" onBackground="neutral-weak">{post.readTime}</Text>
+        </Row>
+        <Heading variant="display-strong-s" wrap="balance">
+          {post.title}
+        </Heading>
+        {post.excerpt && (
+          <Text variant="body-default-l" onBackground="neutral-weak">
+            {post.excerpt}
+          </Text>
+        )}
+      </Column>
 
-      {/* Render the body HTML from Drupal's processed field */}
+      <Line />
+
+      {/* Post body */}
       {post.body && (
         <div
-          className="post-body mx-auto px-5 md:px-10"
-          style={{ maxWidth: '680px' }}
+          className="post-body"
           dangerouslySetInnerHTML={{ __html: post.body }}
         />
       )}
-
-      <div className="mt-20">
-        <NewsletterSection />
-      </div>
-    </article>
+    </Column>
   )
 }

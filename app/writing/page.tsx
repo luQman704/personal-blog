@@ -1,44 +1,25 @@
-import WritingList    from '@/components/WritingList'
-import SectionDivider from '@/components/SectionDivider'
-import { getPosts }   from '@/lib/posts'
+import { Column, Heading, Text } from '@once-ui-system/core'
+import { writing } from '@/resources'
+import { Posts } from '@/components/blog/Posts'
+import { getPosts } from '@/lib/posts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Writing — Lukmon Awoyemi',
+  title:       writing.title,
+  description: writing.description,
 }
 
 export default async function WritingPage() {
-  const posts = await getPosts()
-
+  const posts = await getPosts().catch(() => [])
   return (
-    <div style={{ paddingBottom: '80px' }}>
-      <div className="mx-auto max-w-content px-5 md:px-10 pt-12 md:pt-16 pb-12">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="w-8 h-px" style={{ backgroundColor: 'var(--rust)' }} />
-          <span
-            className="text-xs tracking-widest uppercase font-medium"
-            style={{ color: 'var(--rust)' }}
-          >
-            All articles
-          </span>
-        </div>
-        <h1
-          className="font-serif font-medium tracking-tight"
-          style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: 'var(--ink)' }}
-        >
-          Writing
-        </h1>
-        <p
-          className="mt-4 text-base"
-          style={{ color: 'var(--ink-muted)', maxWidth: '480px' }}
-        >
-          Enterprise Drupal, architecture decisions, full-stack patterns, and
-          occasional deep dives into things that broke in production.
-        </p>
-      </div>
-
-      <SectionDivider label={`${posts.length} article${posts.length !== 1 ? 's' : ''}`} />
-      <WritingList posts={posts} />
-    </div>
+    <Column maxWidth="m" gap="l" paddingY="12">
+      <Column gap="8">
+        <Heading variant="display-strong-s">{writing.label}</Heading>
+        <Text variant="body-default-l" onBackground="neutral-weak">
+          {writing.description}
+        </Text>
+      </Column>
+      <Posts posts={posts} columns="1" />
+    </Column>
   )
 }
