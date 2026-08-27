@@ -1,21 +1,27 @@
+import { Row, Text, Line } from '@once-ui-system/core'
+
 interface SectionDividerProps {
   label: string
 }
 
 export default function SectionDivider({ label }: SectionDividerProps) {
   return (
-    <div
-      className="mx-auto flex items-center gap-5 px-10"
-      style={{ maxWidth: '1100px' }}
+    <Row
+      fillWidth
+      vertical="center"
+      gap="20"
+      paddingX="l"
+      style={{ maxWidth: '1100px', margin: '0 auto' }}
     >
-      <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border)' }} />
-      <span
-        className="text-xs tracking-widest uppercase font-medium whitespace-nowrap"
-        style={{ color: 'var(--ink-muted)' }}
+      <Line flex={1} />
+      <Text
+        variant="label-default-xs"
+        onBackground="neutral-weak"
+        style={{ letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}
       >
         {label}
-      </span>
-      <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border)' }} />
-    </div>
+      </Text>
+      <Line flex={1} />
+    </Row>
   )
 }

@@ -1,3 +1,5 @@
+import { Column, Row, Heading, Text } from '@once-ui-system/core'
+
 const values = [
   {
     title: 'Clarity over cleverness',
@@ -7,7 +9,7 @@ const values = [
   {
     title: 'Real constraints, real solutions',
     body:
-      'Enterprise systems have weird requirements, legacy debt, and political constraints. I\'ve learned to find the clean path within the messy reality rather than pretending it doesn\'t exist.',
+      "Enterprise systems have weird requirements, legacy debt, and political constraints. I've learned to find the clean path within the messy reality rather than pretending it doesn't exist.",
   },
   {
     title: 'Physics intuition in software',
@@ -23,37 +25,38 @@ const values = [
 
 export default function AboutValues() {
   return (
-    <section className="mx-auto max-w-content px-5 md:px-10 mt-16 md:mt-20">
-      <h2
-        className="font-serif font-medium tracking-tight mb-10 text-2xl md:text-3xl"
-        style={{ color: 'var(--ink)' }}
-      >
+    <Column
+      as="section"
+      fillWidth
+      paddingX="l"
+      marginTop="104"
+      gap="32"
+      style={{ maxWidth: '1100px', margin: '104px auto 0' }}
+    >
+      <Heading variant="display-strong-xs" onBackground="neutral-strong">
         How I work
-      </h2>
+      </Heading>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <Row fillWidth gap="20" wrap>
         {values.map((v, i) => (
-          <div
+          <Column
             key={i}
-            className="p-7 border"
-            style={{
-              backgroundColor: i % 2 === 0 ? 'var(--cream-dark)' : 'var(--cream)',
-              borderColor: 'var(--border)',
-              borderRadius: '2px',
-            }}
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="l"
+            padding="32"
+            gap="12"
+            style={{ flex: '1 1 calc(50% - 10px)', minWidth: '280px' }}
           >
-            <h3
-              className="font-serif font-medium text-lg mb-3"
-              style={{ color: 'var(--ink)' }}
-            >
+            <Heading as="h3" variant="heading-strong-m" onBackground="neutral-strong">
               {v.title}
-            </h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-light)', lineHeight: '1.75' }}>
+            </Heading>
+            <Text variant="body-default-s" onBackground="neutral-medium" style={{ lineHeight: 1.75 }}>
               {v.body}
-            </p>
-          </div>
+            </Text>
+          </Column>
         ))}
-      </div>
-    </section>
+      </Row>
+    </Column>
   )
 }

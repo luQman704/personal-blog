@@ -1,113 +1,100 @@
-'use client';
+'use client'
 
+import { Column, Row, Heading, Text, Tag, Line, Button } from '@once-ui-system/core'
 import type { Project } from '@/lib/projects'
 
 interface ProjectCardProps {
   project: Project
 }
 
-const statusColor: Record<Project['status'], { bg: string; color: string }> = {
-  'Live':        { bg: 'rgba(45,74,62,0.1)',   color: 'var(--forest)' },
-  'In Progress': { bg: 'rgba(201,150,58,0.12)', color: 'var(--gold)'   },
-  'Archived':    { bg: 'rgba(26,24,20,0.07)',   color: 'var(--ink-muted)' },
+const statusVariant: Record<Project['status'], 'success' | 'warning' | 'neutral'> = {
+  'Live':        'success',
+  'In Progress': 'warning',
+  'Archived':    'neutral',
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const status = statusColor[project.status]
-
-  console.log(project);
+  const variant = statusVariant[project.status]
 
   return (
-    <div
-      className="flex flex-col border p-7 transition-shadow duration-300 hover:shadow-lg"
-      style={{ backgroundColor: 'var(--cream)', borderColor: 'var(--border)', borderRadius: '2px' }}
+    <Column
+      background="surface"
+      border="neutral-alpha-medium"
+      radius="l"
+      padding="24"
+      gap="16"
+      fillWidth
+      style={{ height: '100%' }}
     >
       {/* Top row — year + status */}
-      <div className="flex items-center justify-between mb-5">
-        <span className="text-xs font-mono" style={{ color: 'var(--ink-muted)' }}>
-          {project.year}
-        </span>
-        <span
-          className="text-xs font-medium tracking-wide uppercase px-2.5 py-1"
-          style={{ backgroundColor: status.bg, color: status.color, borderRadius: '2px' }}
+      <Row fillWidth horizontal="between" vertical="center">
+        <Text
+          variant="label-default-xs"
+          onBackground="neutral-weak"
+          style={{ fontFamily: 'var(--font-code)' }}
         >
-          {project.status}
-        </span>
-      </div>
+          {project.year}
+        </Text>
+        <Tag label={project.status} variant={variant} size="s" />
+      </Row>
 
       {/* Title */}
-      <h3
-        className="font-serif font-medium leading-snug tracking-tight mb-3 text-lg"
-        style={{ color: 'var(--ink)' }}
-      >
+      <Heading as="h3" variant="heading-strong-m" onBackground="neutral-strong">
         {project.title}
-      </h3>
+      </Heading>
 
       {/* Description */}
-      <p
-        className="text-sm leading-relaxed mb-6 flex-1"
-        style={{ color: 'var(--ink-light)', lineHeight: '1.7' }}
+      <Text
+        variant="body-default-s"
+        onBackground="neutral-medium"
+        style={{ lineHeight: 1.7, flex: 1 }}
       >
         {project.description}
-      </p>
+      </Text>
 
       {/* Highlights */}
-      <ul className="mb-6 flex flex-col gap-2">
+      <Column gap="8">
         {project.highlights.map((h, i) => (
-          <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: 'var(--ink-muted)' }}>
-            <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--rust)' }} />
-            {h}
-          </li>
+          <Row key={i} gap="8" vertical="start">
+            <span
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--brand-solid-strong)',
+                flexShrink: 0,
+                marginTop: '7px',
+              }}
+            />
+            <Text variant="body-default-s" onBackground="neutral-medium">
+              {h}
+            </Text>
+          </Row>
         ))}
-      </ul>
+      </Column>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <Row gap="8" wrap>
         {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-xs font-mono px-2 py-0.5 border"
-            style={{
-              backgroundColor: 'var(--cream-dark)',
-              borderColor: 'var(--border)',
-              color: 'var(--ink-light)',
-              borderRadius: '2px',
-            }}
-          >
-            {tag}
-          </span>
+          <Tag key={tag} label={tag} variant="neutral" size="s" />
         ))}
-      </div>
+      </Row>
 
       {/* Links */}
-      <div className="flex items-center gap-4 pt-5 border-t" style={{ borderColor: 'var(--border)' }}>
-        {project.liveUrl && (
-          <a
+      {project.liveUrl && (
+        <>
+          <Line />
+          <Button
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium transition-colors duration-200"
-            style={{ color: 'var(--rust)', textDecoration: 'none' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--rust)' }}
+            variant="ghost"
+            size="s"
           >
             View live →
-          </a>
-        )}
-       {/* {project.repoUrl && (
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm transition-colors duration-200"
-            style={{ color: 'var(--ink-muted)', textDecoration: 'none' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-muted)' }}
-          >
-            GitHub ↗
-          </a>
-        )}*/}
-      </div>
-    </div>
+          </Button>
+        </>
+      )}
+    </Column>
   )
 }

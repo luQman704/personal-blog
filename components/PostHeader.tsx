@@ -1,7 +1,7 @@
-'use client';
-
+'use client'
 
 import Link from 'next/link'
+import { Column, Row, Heading, Text, Line } from '@once-ui-system/core'
 import type { Post } from '@/types'
 
 interface PostHeaderProps {
@@ -10,49 +10,73 @@ interface PostHeaderProps {
 
 export default function PostHeader({ post }: PostHeaderProps) {
   return (
-    <header className="mx-auto max-w-col px-5 md:px-10 pt-12 md:pt-16">
+    <Column
+      as="header"
+      fillWidth
+      paddingX="l"
+      paddingTop="64"
+      gap="24"
+      style={{ maxWidth: '680px', margin: '0 auto' }}
+    >
       {/* Back + category */}
-      <div className="flex items-center gap-4 mb-7" style={{ color: 'var(--ink-muted)' }}>
-        <Link
-          href="/writing"
-          className="flex items-center gap-1.5 text-sm transition-colors duration-200"
-          style={{ color: 'var(--ink-muted)', textDecoration: 'none' }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-muted)' }}
-        >
-          ← Back to writing
+      <Row gap="16" vertical="center">
+        <Link href="/writing" style={{ textDecoration: 'none' }}>
+          <Text variant="body-default-s" onBackground="neutral-medium">
+            ← Back to writing
+          </Text>
         </Link>
-        <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--ink-muted)' }} />
-        <span className="text-sm">{post.category}</span>
-      </div>
+        <Text variant="body-default-s" onBackground="neutral-weak">·</Text>
+        <Text variant="body-default-s" onBackground="neutral-medium">{post.category}</Text>
+      </Row>
 
       {/* Title */}
-      <h1
-        className="font-serif font-medium leading-tight tracking-tight mb-6"
-        style={{ fontSize: 'clamp(26px, 4vw, 44px)', color: 'var(--ink)' }}
+      <Heading
+        as="h1"
+        variant="display-strong-m"
+        onBackground="neutral-strong"
       >
         {post.title}
-      </h1>
+      </Heading>
 
-      {/* Byline — stack on very small, row on sm+ */}
-      <div
-        className="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-t border-b mb-10 md:mb-12"
-        style={{ borderColor: 'var(--border)' }}
-      >
-        <div
-          className="w-10 h-10 rounded-full flex items-center justify-center font-serif italic text-base flex-shrink-0"
-          style={{ backgroundColor: 'var(--forest)', color: 'var(--cream)' }}
-        >
-          LA
-        </div>
-        <div className="flex-1">
-          <p className="text-sm font-medium" style={{ color: 'var(--ink)' }}>Lukmon Awoyemi</p>
-          <p className="text-sm" style={{ color: 'var(--ink-muted)' }}>{post.date} · Wickford, Essex</p>
-        </div>
-        <span className="text-xs font-mono self-start sm:self-auto" style={{ color: 'var(--ink-muted)' }}>
-          {post.readTime}
-        </span>
-      </div>
-    </header>
+      {/* Byline */}
+      <Column gap="0">
+        <Line />
+        <Row vertical="center" gap="16" paddingY="20" wrap>
+          <Column
+            horizontal="center"
+            vertical="center"
+            border="neutral-alpha-medium"
+            radius="full"
+            style={{
+              width: '40px',
+              height: '40px',
+              flexShrink: 0,
+              fontSize: '14px',
+              fontStyle: 'italic',
+              color: 'var(--brand-on-background-strong)',
+              background: 'var(--brand-alpha-weak)',
+            }}
+          >
+            LA
+          </Column>
+          <Column flex={1} gap="2">
+            <Text variant="body-strong-s" onBackground="neutral-strong">
+              Lukmon Awoyemi
+            </Text>
+            <Text variant="body-default-s" onBackground="neutral-medium">
+              {post.date} · Wickford, Essex
+            </Text>
+          </Column>
+          <Text
+            variant="label-default-xs"
+            onBackground="neutral-weak"
+            style={{ fontFamily: 'var(--font-code)' }}
+          >
+            {post.readTime}
+          </Text>
+        </Row>
+        <Line />
+      </Column>
+    </Column>
   )
 }

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Row, Column, Heading, Text, Tag } from '@once-ui-system/core'
 import type { Post } from '@/types'
 
 interface FeaturedPostProps {
@@ -7,28 +8,53 @@ interface FeaturedPostProps {
 
 export default function FeaturedPost({ post }: FeaturedPostProps) {
   return (
-    <section className="mx-auto max-w-content px-5 md:px-10 mt-12 animate-fade-up delay-100">
+    <Column
+      as="section"
+      fillWidth
+      paddingX="l"
+      marginTop="48"
+      style={{ maxWidth: '1100px', margin: '48px auto 0' }}
+    >
       <Link
         href={`/writing/${post.slug}`}
-        className="block border overflow-hidden transition-shadow duration-300 hover:shadow-xl"
-        style={{ borderColor: 'var(--border-strong)', borderRadius: '2px', textDecoration: 'none' }}
+        style={{ textDecoration: 'none', display: 'block' }}
       >
-        {/* stacks vertically on mobile, side by side on md+ */}
-        <div className="grid grid-cols-1 md:grid-cols-2">
-
-          {/* ── Image / code panel ── */}
-          <div
-            className="relative flex items-end p-8 min-h-[220px] md:min-h-[340px] overflow-hidden"
-            style={{ background: 'var(--forest)' }}
+        <Row
+          fillWidth
+          background="surface"
+          border="neutral-alpha-medium"
+          radius="l"
+          overflow="hidden"
+          style={{ transition: 'box-shadow 0.2s' }}
+          s={{ direction: 'column' }}
+        >
+          {/* Image / code panel */}
+          <Column
+            flex={1}
+            vertical="end"
+            padding="32"
+            style={{
+              minHeight: '280px',
+              background: 'linear-gradient(135deg, var(--brand-alpha-strong) 0%, var(--accent-alpha-strong) 100%)',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
           >
-            <div
-              className="absolute inset-0"
-              style={{ background: 'linear-gradient(135deg, var(--forest) 0%, #1a2e26 50%, #0d1a15 100%)' }}
-            />
-            {/* code overlay */}
-            <div
-              className="absolute inset-0 overflow-hidden font-mono text-white leading-loose hidden sm:block"
-              style={{ opacity: 0.07, fontSize: '11px', padding: '20px', wordBreak: 'break-all' }}
+            {/* Decorative code overlay */}
+            <pre
+              style={{
+                position: 'absolute',
+                inset: 0,
+                opacity: 0.07,
+                fontSize: '11px',
+                padding: '20px',
+                wordBreak: 'break-all',
+                overflow: 'hidden',
+                color: 'var(--neutral-on-background-strong)',
+                fontFamily: 'var(--font-code)',
+                lineHeight: 1.6,
+                margin: 0,
+              }}
             >
               {`$query = \\Drupal::entityQuery('node')
   ->condition('type','article')
@@ -40,51 +66,47 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
 $storage = \\Drupal::entityTypeManager()
   ->getStorage('node');
 $nodes = $storage->loadMultiple($nids);`}
-            </div>
-            <span
-              className="relative z-10 inline-block text-xs font-medium tracking-widest uppercase px-3 py-1.5"
-              style={{ backgroundColor: 'var(--gold)', color: 'var(--ink)', borderRadius: '2px' }}
-            >
-              Featured post
-            </span>
-          </div>
+            </pre>
+            <Tag
+              label="Featured post"
+              variant="brand"
+              style={{ position: 'relative', zIndex: 1 }}
+            />
+          </Column>
 
-          {/* ── Content panel ── */}
-          <div
-            className="flex flex-col justify-between p-8 md:p-11"
-            style={{ backgroundColor: 'var(--cream)' }}
-          >
-            <div>
-              <p className="text-xs tracking-widest uppercase font-medium mb-4" style={{ color: 'var(--rust)' }}>
-                {post.category}
-              </p>
-              <h2
-                className="font-serif font-medium leading-snug tracking-tight mb-4 text-2xl md:text-[28px]"
-                style={{ color: 'var(--ink)' }}
+          {/* Content panel */}
+          <Column flex={1} padding="40" gap="24" vertical="between">
+            <Column gap="12">
+              <Text
+                variant="label-default-s"
+                onBackground="brand-medium"
+                style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}
               >
+                {post.category}
+              </Text>
+              <Heading as="h2" variant="display-strong-xs" onBackground="neutral-strong">
                 {post.title}
-              </h2>
-              <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--ink-light)' }}>
+              </Heading>
+              <Text variant="body-default-m" onBackground="neutral-medium" style={{ lineHeight: 1.7 }}>
                 {post.excerpt}
-              </p>
-            </div>
+              </Text>
+            </Column>
 
-            <div>
-              <div className="flex flex-wrap items-center gap-3 text-sm mb-5" style={{ color: 'var(--ink-muted)' }}>
-                <span>Lukmon Awoyemi</span>
-                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--ink-muted)' }} />
-                <span>{post.readTime}</span>
-                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--ink-muted)' }} />
-                <span>{post.date}</span>
-              </div>
-              <span className="inline-flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--rust)' }}>
+            <Column gap="12">
+              <Row gap="12" vertical="center" wrap>
+                <Text variant="body-default-s" onBackground="neutral-medium">Lukmon Awoyemi</Text>
+                <Text variant="body-default-s" onBackground="neutral-weak">·</Text>
+                <Text variant="body-default-s" onBackground="neutral-medium">{post.readTime}</Text>
+                <Text variant="body-default-s" onBackground="neutral-weak">·</Text>
+                <Text variant="body-default-s" onBackground="neutral-medium">{post.date}</Text>
+              </Row>
+              <Text variant="label-default-s" onBackground="brand-strong">
                 Read article →
-              </span>
-            </div>
-          </div>
-
-        </div>
+              </Text>
+            </Column>
+          </Column>
+        </Row>
       </Link>
-    </section>
+    </Column>
   )
 }

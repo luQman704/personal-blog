@@ -1,46 +1,52 @@
-'use client';
-
+'use client'
 
 import Link from 'next/link'
+import { Row, Column, Text, Line } from '@once-ui-system/core'
 
 const footerLinks = [
-  { label: 'GitHub',     href: '/'      },
-  { label: 'LinkedIn',   href: 'www.linkedin.com/in/lukmon-awoyemi-559659120'  },
-  { label: 'Drupal.org', href: '/'             },
-  { label: 'CV',         href: '/cv'                                     },
-  { label: 'RSS',        href: '/feed.xml'                               },
+  { label: 'GitHub',     href: '/'                                                  },
+  { label: 'LinkedIn',   href: 'https://www.linkedin.com/in/lukmon-awoyemi-559659120' },
+  { label: 'Drupal.org', href: '/'                                                  },
+  { label: 'CV',         href: '/cv'                                                },
+  { label: 'RSS',        href: '/feed.xml'                                          },
 ]
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t px-5 md:px-10 py-10 md:py-12" style={{ borderColor: 'var(--border)' }}>
-      <div className="mx-auto max-w-content flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-
-        <span className="font-serif italic text-base" style={{ color: 'var(--ink)' }}>
+    <Column as="footer" fillWidth borderTop="neutral-alpha-medium" marginTop="104">
+      <Row
+        fillWidth
+        horizontal="between"
+        vertical="center"
+        paddingX="l"
+        paddingY="32"
+        gap="24"
+        style={{ maxWidth: '1100px', margin: '0 auto' }}
+        s={{ direction: 'column' }}
+      >
+        <Text variant="body-default-m" onBackground="neutral-strong" style={{ fontStyle: 'italic' }}>
           Lukmon Awoyemi
-        </span>
+        </Text>
 
-        {/* Links — wrap on small screens */}
-        <div className="flex flex-wrap justify-center gap-5 md:gap-7">
+        <Row gap="24" wrap>
           {footerLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm transition-colors duration-200"
-              style={{ color: 'var(--ink-muted)', textDecoration: 'none' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-muted)' }}
+              style={{ textDecoration: 'none' }}
               {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
-              {link.label}
+              <Text variant="body-default-s" onBackground="neutral-medium">
+                {link.label}
+              </Text>
             </Link>
           ))}
-        </div>
+        </Row>
 
-        <span className="text-xs font-mono" style={{ color: 'var(--ink-muted)' }}>
+        <Text variant="label-default-xs" onBackground="neutral-weak" style={{ fontFamily: 'var(--font-code)' }}>
           © {new Date().getFullYear()}
-        </span>
-      </div>
-    </footer>
+        </Text>
+      </Row>
+    </Column>
   )
 }

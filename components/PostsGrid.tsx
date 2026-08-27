@@ -1,4 +1,5 @@
 import PostCard from './PostCard'
+import { Column, Row } from '@once-ui-system/core'
 import type { Post } from '@/types'
 
 interface PostsGridProps {
@@ -7,16 +8,20 @@ interface PostsGridProps {
 
 export default function PostsGrid({ posts }: PostsGridProps) {
   return (
-    <section className="mx-auto max-w-content px-5 md:px-10 mt-12 animate-fade-up delay-200">
-      {/* 1 col on mobile → 2 on sm → 3 on lg */}
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden border"
-        style={{ gap: '1px', backgroundColor: 'var(--border)', borderColor: 'var(--border)', borderRadius: '2px' }}
-      >
+    <Column
+      as="section"
+      fillWidth
+      paddingX="l"
+      marginTop="48"
+      style={{ maxWidth: '1100px', margin: '48px auto 0' }}
+    >
+      <Row fillWidth gap="16" wrap>
         {posts.map((post, i) => (
-          <PostCard key={post.id} post={post} index={i} />
+          <Column key={post.id} style={{ flex: '1 1 calc(33.333% - 11px)', minWidth: '280px' }}>
+            <PostCard post={post} index={i} />
+          </Column>
         ))}
-      </div>
-    </section>
+      </Row>
+    </Column>
   )
 }

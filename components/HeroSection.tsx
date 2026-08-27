@@ -1,18 +1,19 @@
-'use client';
+'use client'
 
 import Link from 'next/link'
+import { Row, Column, Text, Heading, Button, Tag, Line } from '@once-ui-system/core'
 
 const stackTags = [
-  { label: 'Drupal',    highlight: true  },
-  { label: 'Next.js',   highlight: true  },
-  { label: 'React',     highlight: false },
-  { label: 'PHP 8',     highlight: false },
-  { label: 'TypeScript',highlight: false },
-  { label: 'Node.js',   highlight: false },
-  { label: 'MySQL',     highlight: false },
-  { label: 'Solr',      highlight: false },
-  { label: 'Pantheon',  highlight: false },
-  { label: 'DDEV',      highlight: false },
+  { label: 'Drupal',     highlight: true  },
+  { label: 'Next.js',    highlight: true  },
+  { label: 'React',      highlight: false },
+  { label: 'PHP 8',      highlight: false },
+  { label: 'TypeScript', highlight: false },
+  { label: 'Node.js',    highlight: false },
+  { label: 'MySQL',      highlight: false },
+  { label: 'Solr',       highlight: false },
+  { label: 'Pantheon',   highlight: false },
+  { label: 'DDEV',       highlight: false },
 ]
 
 const stats = [
@@ -24,107 +25,129 @@ const stats = [
 
 export default function HeroSection() {
   return (
-    <section className="mx-auto max-w-content px-5 md:px-10 pt-12 md:pt-20 pb-10 md:pb-16 animate-fade-up">
-      {/* one col on mobile, two on large screens */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-20">
+    <Column
+      as="section"
+      fillWidth
+      paddingX="l"
+      paddingTop="80"
+      paddingBottom="64"
+      style={{ maxWidth: '1100px', margin: '0 auto' }}
+    >
+      <Row fillWidth gap="80" s={{ direction: 'column', gap: '40' }}>
 
-        {/* ── Left ── */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px" style={{ backgroundColor: 'var(--rust)' }} />
-            <span className="text-xs tracking-widest uppercase font-medium" style={{ color: 'var(--rust)' }}>
+        {/* Left column */}
+        <Column flex={1} gap="32">
+          {/* Eyebrow */}
+          <Row gap="12" vertical="center">
+            <Line style={{ width: '32px' }} />
+            <Text variant="label-default-s" onBackground="brand-medium" style={{ letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               Acquia Certified · Drupal
-            </span>
-          </div>
+            </Text>
+          </Row>
 
-          <h1
-            className="font-serif font-medium leading-none tracking-tight mb-6"
-            style={{ fontSize: 'clamp(36px, 5vw, 56px)', color: 'var(--ink)' }}
+          {/* Hero heading */}
+          <Heading
+            as="h1"
+            variant="display-strong-l"
+            onBackground="neutral-strong"
+            style={{ lineHeight: 1 }}
           >
             Building{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--rust)' }}>real things</em>
+            <Text
+              as="em"
+              variant="display-strong-l"
+              onBackground="brand-strong"
+              style={{ fontStyle: 'italic' }}
+            >
+              real things
+            </Text>
             {' '}for the enterprise web
-          </h1>
+          </Heading>
 
-          <p
-            className="text-base md:text-lg leading-relaxed mb-9 max-w-xl"
-            style={{ color: 'var(--ink-light)' }}
+          <Text
+            variant="body-default-l"
+            onBackground="neutral-medium"
+            style={{ maxWidth: '560px', lineHeight: 1.7 }}
           >
             Senior Drupal &amp; full-stack developer with 7+ years shipping production
             systems for the WTO, MTN, and global NGOs. I write about architecture,
-            headless CMS, and the things I've learned the hard way.
-          </p>
+            headless CMS, and the things I&apos;ve learned the hard way.
+          </Text>
 
-          <div className="flex flex-wrap items-center gap-5">
-            <Link
-              href="/writing"
-              className="inline-block px-6 py-3 text-sm font-medium transition-all duration-200 hover:-translate-y-px"
-              style={{ backgroundColor: 'var(--ink)', color: 'var(--cream)', borderRadius: '2px' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--forest)' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--ink)' }}
-            >
+          <Row gap="24" vertical="center" wrap>
+            <Button href="/writing" variant="primary" size="m">
               Read latest post →
-            </Link>
-            <Link
-              href="/projects"
-              className="text-sm transition-colors duration-200"
-              style={{ color: 'var(--ink-muted)' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink-muted)' }}
-            >
+            </Button>
+            <Button href="/projects" variant="ghost" size="m">
               View projects →
-            </Link>
-          </div>
-        </div>
+            </Button>
+          </Row>
+        </Column>
 
-        {/* ── Right sidebar — only visible on large screens ── */}
-        <div className="hidden lg:block pt-2">
-          <div
-            className="border p-7 mb-5"
-            style={{ backgroundColor: 'var(--cream-dark)', borderColor: 'var(--border)', borderRadius: '2px' }}
+        {/* Right sidebar */}
+        <Column gap="16" style={{ width: '320px', flexShrink: 0 }} s={{ hide: true }}>
+          {/* Stack panel */}
+          <Column
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="l"
+            padding="24"
+            gap="16"
           >
-            <p className="text-xs tracking-widest uppercase font-medium mb-4" style={{ color: 'var(--ink-muted)' }}>
+            <Text
+              variant="label-default-s"
+              onBackground="neutral-weak"
+              style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}
+            >
               Current stack
-            </p>
-            <div className="flex flex-wrap gap-2">
+            </Text>
+            <Row gap="8" wrap>
               {stackTags.map((tag) => (
-                <span
+                <Tag
                   key={tag.label}
-                  className="text-xs font-mono px-2.5 py-1 border"
-                  style={{
-                    borderRadius: '2px',
-                    ...(tag.highlight
-                      ? { backgroundColor: 'var(--rust-light)', borderColor: 'var(--rust)', color: 'var(--rust)' }
-                      : { backgroundColor: 'var(--cream)', borderColor: 'var(--border-strong)', color: 'var(--ink-light)' }),
-                  }}
-                >
-                  {tag.label}
-                </span>
+                  label={tag.label}
+                  variant={tag.highlight ? 'brand' : 'neutral'}
+                />
               ))}
-            </div>
-          </div>
+            </Row>
+          </Column>
 
-          <div
-            className="border p-7"
-            style={{ backgroundColor: 'var(--cream-dark)', borderColor: 'var(--border)', borderRadius: '2px' }}
+          {/* Quick facts panel */}
+          <Column
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="l"
+            padding="24"
+            gap="0"
           >
-            <p className="text-xs tracking-widest uppercase font-medium mb-4" style={{ color: 'var(--ink-muted)' }}>
+            <Text
+              variant="label-default-s"
+              onBackground="neutral-weak"
+              style={{ letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}
+            >
               Quick facts
-            </p>
+            </Text>
             {stats.map((stat, i) => (
-              <div
+              <Row
                 key={stat.label}
-                className="flex justify-between py-2"
-                style={{ borderBottom: i < stats.length - 1 ? '1px solid var(--border)' : 'none' }}
+                fillWidth
+                horizontal="between"
+                vertical="center"
+                paddingY="12"
+                borderBottom={i < stats.length - 1 ? 'neutral-alpha-weak' : undefined}
               >
-                <span className="text-sm" style={{ color: 'var(--ink-muted)' }}>{stat.label}</span>
-                <span className="text-sm font-medium" style={{ color: 'var(--ink)' }}>{stat.value}</span>
-              </div>
+                <Text variant="body-default-s" onBackground="neutral-medium">
+                  {stat.label}
+                </Text>
+                <Text variant="body-strong-s" onBackground="neutral-strong">
+                  {stat.value}
+                </Text>
+              </Row>
             ))}
-          </div>
-        </div>
+          </Column>
+        </Column>
 
-      </div>
-    </section>
+      </Row>
+    </Column>
   )
 }

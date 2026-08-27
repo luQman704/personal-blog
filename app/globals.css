@@ -1,104 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
-
-@import "tailwindcss";
-@config "../tailwind.config.ts";
-
-:root {
-  --cream: #F7F4EE;
-  --cream-dark: #EDE8DE;
-  --ink: #1A1814;
-  --ink-light: #4A4640;
-  --ink-muted: #8A857D;
-  --rust: #B85C38;
-  --rust-light: #F0E8E2;
-  --forest: #2D4A3E;
-  --gold: #C9963A;
-  --border: rgba(26,24,20,0.12);
-  --border-strong: rgba(26,24,20,0.25);
-  --font-serif: 'Lora', Georgia, serif;
-  --font-sans: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-}
-
-
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--cream);
-  color: var(--ink);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Noise texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 200px;
-}
-
-/* Typography utilities */
-.font-serif { font-family: var(--font-serif); }
-.font-sans  { font-family: var(--font-sans); }
-.font-mono  { font-family: var(--font-mono); }
-
-/* Fade-up animation */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-up { animation: fadeUp 0.6s ease both; }
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-
-/* Post body typography */
+/* Post body typography — used by PostBody.tsx */
 .post-body p {
-  font-family: var(--font-serif);
   font-size: 18px;
   line-height: 1.85;
-  color: var(--ink-light);
   margin-bottom: 28px;
+  color: var(--neutral-on-background-medium);
 }
 
 .post-body p:first-child {
   font-size: 20px;
-  color: var(--ink);
+  color: var(--neutral-on-background-strong);
   line-height: 1.75;
 }
 
 .post-body h2 {
-  font-family: var(--font-serif);
   font-size: 26px;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--neutral-on-background-strong);
   margin: 48px 0 20px;
   letter-spacing: -0.01em;
 }
 
 .post-body h3 {
-  font-family: var(--font-sans);
   font-size: 16px;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--neutral-on-background-strong);
   margin: 32px 0 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .post-body blockquote {
-  border-left: 3px solid var(--rust);
+  border-left: 3px solid var(--brand-solid-strong);
   padding: 4px 0 4px 28px;
   margin: 36px 0;
 }
@@ -106,23 +38,23 @@ body::before {
 .post-body blockquote p {
   font-size: 20px !important;
   font-style: italic;
-  color: var(--ink) !important;
+  color: var(--neutral-on-background-strong) !important;
   margin: 0 !important;
 }
 
 .post-body code {
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   font-size: 14px;
-  background: var(--cream-dark);
-  border: 1px solid var(--border);
+  background: var(--neutral-alpha-weak);
+  border: 1px solid var(--neutral-alpha-medium);
   padding: 2px 7px;
-  border-radius: 2px;
-  color: var(--rust);
+  border-radius: 4px;
+  color: var(--brand-on-background-medium);
 }
 
 .post-body pre {
-  background: var(--ink);
-  border-radius: 4px;
+  background: var(--neutral-background-strong);
+  border-radius: 8px;
   padding: 28px 32px;
   margin: 32px 0;
   overflow-x: auto;
@@ -132,23 +64,22 @@ body::before {
   background: none;
   border: none;
   padding: 0;
-  color: #A8C8A0;
+  color: var(--brand-on-background-weak);
   font-size: 14px;
   line-height: 1.7;
 }
 
 .post-body .callout {
-  background: var(--rust-light);
-  border-left: 3px solid var(--rust);
+  background: var(--brand-alpha-weak);
+  border-left: 3px solid var(--brand-solid-strong);
   padding: 20px 24px;
   margin: 32px 0;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .post-body .callout p {
-  font-family: var(--font-sans) !important;
   font-size: 15px !important;
-  color: var(--ink-light) !important;
+  color: var(--neutral-on-background-medium) !important;
   margin: 0 !important;
   line-height: 1.65 !important;
 }

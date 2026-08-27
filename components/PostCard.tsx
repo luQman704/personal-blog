@@ -1,6 +1,7 @@
-'use client';
+'use client'
 
 import Link from 'next/link'
+import { Column, Row, Text, Heading, Tag } from '@once-ui-system/core'
 import type { Post } from '@/types'
 
 interface PostCardProps {
@@ -9,63 +10,51 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post, index }: PostCardProps) {
-
-  console.log(post);
   return (
     <Link
       href={`/writing/${post.slug}`}
-      className="block p-8 transition-colors duration-200 no-underline"
-      style={{ backgroundColor: 'var(--cream)', textDecoration: 'none' }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--cream-dark)'
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--cream)'
-      }}
+      style={{ textDecoration: 'none', display: 'block' }}
     >
-      {/* Number */}
-      <p
-        className="font-mono text-xs tracking-wide mb-5"
-        style={{ color: 'var(--border-strong)' }}
+      <Column
+        background="surface"
+        border="neutral-alpha-medium"
+        radius="l"
+        padding="32"
+        gap="16"
+        fillWidth
+        style={{ height: '100%', transition: 'box-shadow 0.2s', cursor: 'pointer' }}
       >
-        0{index + 1}
-      </p>
-
-      {/* Title */}
-      <h3
-        className="font-serif font-medium leading-snug tracking-tight mb-3"
-        style={{ fontSize: '19px', color: 'var(--ink)' }}
-      >
-        {post.title}
-      </h3>
-
-      {/* Excerpt */}
-      <p
-        className="text-sm leading-relaxed mb-6"
-        style={{ color: 'var(--ink-muted)', lineHeight: '1.65' }}
-      >
-        {post.excerpt}
-      </p>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between">
-        <span
-          className="text-xs font-medium tracking-wide uppercase px-2.5 py-1 rounded-sm"
-          style={{
-            color: 'var(--forest)',
-            backgroundColor: 'rgba(45,74,62,0.1)',
-            borderRadius: '2px',
-          }}
+        {/* Number */}
+        <Text
+          variant="label-default-xs"
+          onBackground="neutral-weak"
+          style={{ fontFamily: 'var(--font-code)' }}
         >
-          {post.category}
-        </span>
-        <span
-          className="text-xs font-mono"
-          style={{ color: 'var(--ink-muted)' }}
-        >
-          {post.date}
-        </span>
-      </div>
+          0{index + 1}
+        </Text>
+
+        {/* Title */}
+        <Heading as="h3" variant="heading-default-m" onBackground="neutral-strong">
+          {post.title}
+        </Heading>
+
+        {/* Excerpt */}
+        <Text variant="body-default-s" onBackground="neutral-medium" style={{ lineHeight: 1.65, flex: 1 }}>
+          {post.excerpt}
+        </Text>
+
+        {/* Footer */}
+        <Row fillWidth horizontal="between" vertical="center">
+          <Tag label={post.category} variant="brand" size="s" />
+          <Text
+            variant="label-default-xs"
+            onBackground="neutral-weak"
+            style={{ fontFamily: 'var(--font-code)' }}
+          >
+            {post.date}
+          </Text>
+        </Row>
+      </Column>
     </Link>
   )
 }

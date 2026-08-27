@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { Row, Column, Flex, Text, Button, Line } from '@once-ui-system/core'
 
 const navLinks = [
   { label: 'Home',     href: '/'         },
@@ -16,112 +17,150 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <nav
-      className="sticky top-0 z-50 border-b"
-      style={{ backgroundColor: 'var(--cream)', borderColor: 'var(--border)' }}
+    <Column
+      as="nav"
+      fillWidth
+      background="surface"
+      borderBottom="neutral-alpha-medium"
+      position="sticky"
+      zIndex={9}
+      style={{ top: 0 }}
     >
-      <div className="mx-auto max-w-content flex h-16 items-center justify-between px-5 md:px-10">
-
+      <Row
+        fillWidth
+        horizontal="between"
+        vertical="center"
+        paddingX="l"
+        paddingY="16"
+        style={{ maxWidth: '1100px', margin: '0 auto' }}
+      >
         {/* Logo */}
-        <Link
-          href="/"
-          className="font-serif text-lg font-medium tracking-tight"
-          style={{ color: 'var(--ink)' }}
-        >
-          Lukmon <span style={{ color: 'var(--rust)' }}>Awoyemi</span>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <Text
+            variant="heading-default-m"
+            onBackground="neutral-strong"
+          >
+            Lukmon{' '}
+            <Text
+              as="span"
+              variant="heading-default-m"
+              onBackground="brand-strong"
+            >
+              Awoyemi
+            </Text>
+          </Text>
         </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8 list-none">
+        {/* Desktop nav */}
+        <Row gap="32" vertical="center" hide={false} s={{ hide: true }}>
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-xs tracking-widest uppercase transition-colors duration-200"
-                style={{ color: pathname === link.href ? 'var(--ink)' : 'var(--ink-muted)' }}
+            <Link
+              key={link.href}
+              href={link.href}
+              style={{ textDecoration: 'none' }}
+            >
+              <Text
+                variant="label-default-s"
+                onBackground={pathname === link.href ? 'neutral-strong' : 'neutral-medium'}
+                style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}
               >
                 {link.label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link
-              href="/contact"
-              className="text-sm font-medium border px-4 py-2 transition-all duration-200"
-              style={{ color: 'var(--rust)', borderColor: 'var(--rust)', borderRadius: '2px' }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement
-                el.style.backgroundColor = 'var(--rust)'
-                el.style.color = 'var(--cream)'
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement
-                el.style.backgroundColor = 'transparent'
-                el.style.color = 'var(--rust)'
-              }}
-            >
-              Hire me
+              </Text>
             </Link>
-          </li>
-        </ul>
+          ))}
+          <Button
+            href="/contact"
+            variant="secondary"
+            size="s"
+          >
+            Hire me
+          </Button>
+        </Row>
 
         {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+        <Flex
+          as="button"
+          direction="column"
+          gap="4"
+          padding="8"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          hide={true}
+          s={{ hide: false }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
         >
           <span
-            className="block w-6 h-px transition-all duration-200"
             style={{
-              backgroundColor: 'var(--ink)',
+              display: 'block',
+              width: '24px',
+              height: '1px',
+              backgroundColor: 'var(--neutral-on-background-strong)',
+              transition: 'transform 0.2s',
               transform: menuOpen ? 'rotate(45deg) translateY(6px)' : 'none',
             }}
           />
           <span
-            className="block w-6 h-px transition-all duration-200"
             style={{
-              backgroundColor: 'var(--ink)',
+              display: 'block',
+              width: '24px',
+              height: '1px',
+              backgroundColor: 'var(--neutral-on-background-strong)',
+              transition: 'opacity 0.2s',
               opacity: menuOpen ? 0 : 1,
             }}
           />
           <span
-            className="block w-6 h-px transition-all duration-200"
             style={{
-              backgroundColor: 'var(--ink)',
+              display: 'block',
+              width: '24px',
+              height: '1px',
+              backgroundColor: 'var(--neutral-on-background-strong)',
+              transition: 'transform 0.2s',
               transform: menuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none',
             }}
           />
-        </button>
-      </div>
+        </Flex>
+      </Row>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div
-          className="md:hidden border-t px-5 py-4 flex flex-col gap-4"
-          style={{ backgroundColor: 'var(--cream)', borderColor: 'var(--border)' }}
+        <Column
+          fillWidth
+          background="surface"
+          borderTop="neutral-alpha-medium"
+          paddingX="l"
+          paddingY="16"
+          gap="16"
+          hide={false}
+          s={{ hide: true }}
         >
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-sm tracking-widest uppercase"
-              style={{ color: pathname === link.href ? 'var(--ink)' : 'var(--ink-muted)' }}
+              style={{ textDecoration: 'none' }}
             >
-              {link.label}
+              <Text
+                variant="label-default-s"
+                onBackground={pathname === link.href ? 'neutral-strong' : 'neutral-medium'}
+                style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}
+              >
+                {link.label}
+              </Text>
             </Link>
           ))}
-          <Link
+          <Button
             href="/contact"
+            variant="secondary"
+            size="s"
+            fillWidth
             onClick={() => setMenuOpen(false)}
-            className="text-sm font-medium border px-4 py-2 text-center mt-1"
-            style={{ color: 'var(--rust)', borderColor: 'var(--rust)', borderRadius: '2px' }}
           >
             Hire me
-          </Link>
-        </div>
+          </Button>
+        </Column>
       )}
-    </nav>
+    </Column>
   )
 }
