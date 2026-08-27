@@ -1,5 +1,5 @@
-import { Column, Row, Heading, Text, Tag, Line, RevealFx } from '@once-ui-system/core'
-import { about } from '@/resources'
+import { Avatar, Column, Row, Heading, Text, Tag, Line, RevealFx } from '@once-ui-system/core'
+import { about, person } from '@/resources'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -10,14 +10,22 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <Column maxWidth="m" gap="xl" paddingY="12">
-      {/* Page header */}
+      {/* Avatar + page header */}
       <RevealFx translateY="4" fillWidth>
-        <Column gap="16">
-          <Heading variant="display-strong-s">{about.label}</Heading>
-          <Text variant="body-default-l" onBackground="neutral-weak">
-            {about.description}
-          </Text>
-        </Column>
+        <Row gap="24" vertical="center" wrap>
+          {about.avatar.display && (
+            <Avatar
+              src={person.avatar}
+              size="xl"
+            />
+          )}
+          <Column gap="8">
+            <Heading variant="display-strong-s">{person.name}</Heading>
+            <Text variant="body-default-l" onBackground="neutral-weak">
+              {person.role}
+            </Text>
+          </Column>
+        </Row>
       </RevealFx>
 
       {/* Introduction */}

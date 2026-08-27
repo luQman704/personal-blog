@@ -41,7 +41,7 @@ export const about = {
   title:       'About — Lukmon Awoyemi',
   description: 'Senior Drupal & full-stack developer, Acquia Certified. Physics graduate, MSc Computer Science. Based in Wickford, Essex.',
   tableOfContent: { display: true,  subItems: false },
-  avatar:         { display: false },
+  avatar:         { display: true },
   calendar:       { display: false, link: '' },
   intro: {
     display: true,

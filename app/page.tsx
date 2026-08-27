@@ -1,5 +1,5 @@
-import { Column, Heading, Text, Button, Row, Line, RevealFx } from '@once-ui-system/core'
-import { home, about, routes } from '@/resources'
+import { Avatar, Column, Heading, Text, Button, Row, Line, RevealFx } from '@once-ui-system/core'
+import { home, about, person, routes } from '@/resources'
 import { Posts } from '@/components/blog/Posts'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { getPosts } from '@/lib/posts'
@@ -14,6 +14,9 @@ export default async function Home() {
       {/* Hero */}
       <Column fillWidth horizontal="center" gap="m">
         <Column maxWidth="s" horizontal="center" align="center">
+          <RevealFx translateY="4" delay={0.1} horizontal="center" paddingBottom="20">
+            <Avatar src={person.avatar} size="xl" />
+          </RevealFx>
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
             <Heading wrap="balance" variant="display-strong-l">
               {home.headline}
