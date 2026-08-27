@@ -28,9 +28,9 @@ export const home = {
   featured:    { display: false, title: '', href: '/' },
   subline: (
     <>
-      Senior Drupal &amp; full-stack developer with <strong>7+ years</strong> shipping
-      production systems for the WTO, MTN, and global NGOs. I write about architecture,
-      headless CMS, and the things I&apos;ve learned the hard way.
+      Senior Drupal &amp; full-stack developer with <strong>7+ years</strong>{' '}
+      shipping production systems for the WTO, MTN, and global NGOs. I write about
+      architecture, headless CMS, and the things I&apos;ve learned the hard way.
     </>
   ),
 }
