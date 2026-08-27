@@ -1,60 +1,77 @@
-import { Card, Column, Row, Tag, Text } from '@once-ui-system/core'
+'use client'
+
+import { Carousel, Column, Flex, Heading, Row, SmartLink, Tag, Text } from '@once-ui-system/core'
 import type { Project } from '@/lib/projects'
 
 export function ProjectCard({ project }: { project: Project }) {
+  const hasImages = project.images && project.images.length > 0
+
   return (
-    <Card
-      fillWidth
-      border="neutral-alpha-weak"
-      background="surface"
-      radius="l"
-      padding="0"
-      overflow="hidden"
-    >
-      <Column padding="32" gap="16">
-        <Row gap="8" vertical="center" horizontal="between" wrap>
-          <Text variant="heading-strong-l">{project.title}</Text>
-          <Row gap="8">
+    <Column fillWidth gap="m">
+      {hasImages && (
+        <Carousel
+          sizes="(max-width: 960px) 100vw, 960px"
+          aspectRatio="16/9"
+          items={project.images!.map((src) => ({
+            slide: src,
+            alt: project.title,
+          }))}
+        />
+      )}
+
+      <Flex
+        fillWidth
+        paddingX="s"
+        paddingTop="12"
+        paddingBottom="24"
+        gap="l"
+        s={{ direction: 'column' }}
+      >
+        {/* Title + status */}
+        <Flex flex={5} direction="column" gap="8">
+          <Heading as="h2" wrap="balance" variant="heading-strong-xl">
+            {project.title}
+          </Heading>
+          <Row gap="8" wrap>
             <Tag
               label={project.status}
               variant={project.status === 'Live' ? 'success' : 'neutral'}
               size="s"
             />
             <Tag label={project.year} variant="neutral" size="s" />
-          </Row>
-        </Row>
-        <Text variant="body-default-m" onBackground="neutral-weak">
-          {project.description}
-        </Text>
-        {project.highlights.length > 0 && (
-          <Column as="ul" gap="8" paddingLeft="16">
-            {project.highlights.map((h, i) => (
-              <Text as="li" key={i} variant="body-default-s" onBackground="neutral-medium">
-                {h}
-              </Text>
+            {project.tags.slice(0, 4).map((tag) => (
+              <Tag key={tag} label={tag} variant="neutral" size="s" />
             ))}
-          </Column>
-        )}
-        <Row gap="8" wrap>
-          {project.tags.map((tag) => (
-            <Tag key={tag} label={tag} variant="neutral" size="s" />
-          ))}
-        </Row>
-        {(project.liveUrl || project.repoUrl) && (
-          <Row gap="12" marginTop="8">
+          </Row>
+        </Flex>
+
+        {/* Description + links */}
+        <Column flex={7} gap="16">
+          <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
+            {project.description}
+          </Text>
+          <Flex gap="24" wrap>
             {project.liveUrl && (
-              <Text as="a" href={project.liveUrl} variant="body-default-s" onBackground="brand-medium">
-                Live site →
-              </Text>
+              <SmartLink
+                suffixIcon="arrowUpRight"
+                style={{ margin: '0', width: 'fit-content' }}
+                href={project.liveUrl}
+              >
+                <Text variant="body-default-s">View project</Text>
+              </SmartLink>
             )}
             {project.repoUrl && (
-              <Text as="a" href={project.repoUrl} variant="body-default-s" onBackground="neutral-medium">
-                Repository →
-              </Text>
+              <SmartLink
+                suffixIcon="arrowUpRight"
+                style={{ margin: '0', width: 'fit-content' }}
+                href={project.repoUrl}
+              >
+                <Text variant="body-default-s">Repository</Text>
+              </SmartLink>
             )}
-          </Row>
-        )}
-      </Column>
-    </Card>
+          </Flex>
+        </Column>
+      </Flex>
+    </Column>
   )
 }

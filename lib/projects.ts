@@ -10,6 +10,8 @@ export interface Project {
   liveUrl?: string
   repoUrl?: string
   highlights: string[]
+  /** Paths relative to /public — shown in the card carousel */
+  images?: string[]
 }
 
 export const projects: Project[] = [
@@ -25,6 +27,7 @@ export const projects: Project[] = [
     status: 'Live',
     year: '2024–present',
     liveUrl: 'https://enhancedif.org',
+    images: ['/images/projects/eif.png'],
     highlights: [
       'Custom WebformHandlerBase module for grant applications',
       'Multilingual PDF generation with per-language email notifications',
@@ -43,6 +46,7 @@ export const projects: Project[] = [
     category: 'Drupal',
     status: 'Live',
     year: '2023–present',
+    images: ['/images/projects/wto-tprqa.png'],
     highlights: [
       'Dual SAML authentication — WTO staff + external delegates',
       'Custom REST API for Q&A workflow management',
@@ -62,6 +66,7 @@ export const projects: Project[] = [
     status: 'In Progress',
     year: '2026',
     repoUrl: 'https://github.com/lukmon-awoyemi/lukmon-dev',
+    images: ['/images/projects/lukmon-dev.png'],
     highlights: [
       'Headless Drupal + Next.js App Router',
       'ISR with Drupal cache tag purge webhooks',
@@ -99,6 +104,7 @@ export const projects: Project[] = [
     category: 'Full Stack',
     status: 'Live',
     year: '2024',
+    images: ['/images/projects/fish-fund.png'],
     highlights: [
       '6-language support using Drupal.t() internationalisation',
       'Server-side PDF generation from submitted form data',
@@ -117,6 +123,7 @@ export const projects: Project[] = [
     category: 'Full Stack',
     status: 'Live',
     year: '2024',
+    images: ['/images/projects/prestashop-yoco.png'],
     highlights: [
       'PHP 8.2 compatibility — fixed 40+ deprecation warnings and breaks',
       'Yoco payment API integration with webhook status handling',
